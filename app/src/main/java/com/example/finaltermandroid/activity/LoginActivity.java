@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout LoginNameInputLayout,LoginPasswordInputLayout;
     TextInputEditText LoginNameEditText,LoginPasswordText;
     MaterialButton btnLogin;
-    TextView tvRegister;
+    TextView tvRegister,tvForgotPassword;
     private FirebaseAuth auth;
     private boolean checkLengthFalse = false;
     @Override
@@ -50,9 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         LoadEditTextAndInputLayout(LoginPasswordInputLayout,LoginPasswordText);
         LoginNameEditText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         LoginPasswordText.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
-
-
-
+        tvForgotPassword = (TextView) findViewById(R.id.tvForgotPassword);
         tvRegister = (TextView) findViewById(R.id.tvRegister);
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +74,13 @@ public class LoginActivity extends AppCompatActivity {
                         signIn(username, password);
                     }
                 }
+            }
+        });
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordEnterEmailActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -104,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                     checkLengthFalse = true;
                 }
                 else{
+                    checkLengthFalse = false;
                     textInputLayout.setError(null);
                 }
             }

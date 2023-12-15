@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
-                app:counterMaxLength="30"
+                app:counterMaxLength="50"
                 app:endIconDrawable="@drawable/ic_clear"
                 app:endIconMode="custom"
                 app:startIconDrawable="@drawable/ic_email">

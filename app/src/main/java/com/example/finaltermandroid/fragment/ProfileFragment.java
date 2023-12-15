@@ -19,6 +19,7 @@ import com.example.finaltermandroid.dialog.EditPasswordDialog;
 import com.example.finaltermandroid.dialog.EditPhoneDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileFragment extends Fragment {
     TextView tvName, tv_phoneNumberValue,tv_emailValue,tv_passwordValue;
     ImageView iv_editPhoneNumber,iv_editPassword;
+    MaterialButton btnLogout;
     private String oldPasswordValue;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +43,15 @@ public class ProfileFragment extends Fragment {
         tv_passwordValue = (TextView) view.findViewById(R.id.tv_passwordValue);
         iv_editPhoneNumber = (ImageView) view.findViewById(R.id.iv_editPhoneNumber);
         iv_editPassword = (ImageView) view.findViewById(R.id.iv_editPassword);
+        btnLogout = view.findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -137,7 +148,6 @@ public class ProfileFragment extends Fragment {
             tv_phoneNumberValue.setText(result);
         }
     }
-
     public void showEditPasswordDialog() {
         EditPasswordDialog editPasswordDialog = new EditPasswordDialog();
         editPasswordDialog.show(getChildFragmentManager(), "EditPasswordDialogFragment");

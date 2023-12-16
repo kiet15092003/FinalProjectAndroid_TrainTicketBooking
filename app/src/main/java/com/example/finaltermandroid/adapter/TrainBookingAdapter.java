@@ -85,7 +85,21 @@ public class TrainBookingAdapter extends RecyclerView.Adapter<TrainBookingAdapte
         holder.btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "abc",Toast.LENGTH_LONG).show();
+                DatabaseReference stationScheduleRef = FirebaseDatabase.getInstance().getReference().child("stationSchedule").child(trainSchedule.getStationSchedule());
+                stationScheduleRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String buttonText = trainSchedule.getTrainNumber() + " - " + trainSchedule.getDepartureTime() + " - "
+                                + snapshot.child("departureDate").getValue(String.class);
+                        if (listener != null) {
+                            listener.onButtonClick(buttonText);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
     }
@@ -93,6 +107,14 @@ public class TrainBookingAdapter extends RecyclerView.Adapter<TrainBookingAdapte
     @Override
     public int getItemCount() {
         return trainScheduleList.size();
+    }
+    public interface OnButtonClickListener {
+        void onButtonClick(String buttonText);
+    }
+    private OnButtonClickListener listener;
+
+    public void setOnButtonClickListener(OnButtonClickListener listener) {
+        this.listener = listener;
     }
 
     public static class myViewHolder extends RecyclerView.ViewHolder {

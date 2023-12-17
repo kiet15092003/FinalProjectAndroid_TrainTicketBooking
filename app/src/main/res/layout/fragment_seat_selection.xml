@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.SeatSelectionFragment">
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Select a seat type"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/btnSeatType1"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_seat_type"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="Coach 1: AC seat"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="433k"
+            android:textColor="#FF6319"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnSeatType2"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="31dp"
+        android:background="@drawable/btn_notselect_seattype"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/btnSeatType1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/btnSeatType1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="Coach 2: Non-AC seat"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="200k"
+            android:textColor="#BFBFBF"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ChooseSeat"
+        android:layout_width="match_parent"
+        android:layout_height="470dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSeatType1"
+        android:weightSum="5"
+        android:background="@drawable/btn_notselect_seattype">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/btn_notselect_seattype"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="Coach 1: AC seat"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="4.5">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/btn_notselect_seattype"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="8dp"/>
+
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="Availiable"
+                     android:layout_marginStart="5dp"
+                     android:layout_marginTop="8dp"/>
+
+                <Button
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/button_seat_type"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="8dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Selected"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"/>
+                <Button
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="#919191"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="8dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Selected"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn1"
+                android:text="1"
+                android:textColor="#D9D9D9"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="32dp"
+                app:layout_constraintEnd_toStartOf="@id/btn2"/>
+
+            <Button
+                android:id="@+id/btn2"
+                android:text="2"
+                android:textColor="#D9D9D9"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                app:layout_constraintStart_toEndOf="@id/btn1"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <Button
+                android:id="@+id/btn3"
+                android:text="3"
+                android:textColor="#D9D9D9"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                app:layout_constraintTop_toBottomOf="@id/btn1"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="32dp"/>
+
+            <Button
+                android:id="@+id/btn4"
+                android:text="4"
+                android:textColor="#D9D9D9"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                app:layout_constraintTop_toBottomOf="@id/btn2"
+                app:layout_constraintStart_toEndOf="@id/btn3"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="12dp"/>
+            <Button
+                android:id="@+id/btn5"
+                android:text="5"
+                android:textColor="#D9D9D9"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                app:layout_constraintTop_toBottomOf="@id/btn3"
+                app:layout_constraintStart_toStartOf="@id/btn3"
+                android:layout_marginTop="20dp"
+                />
+            <Button
+                android:id="@id/btn6"
+                android:text="6"
+                android:textColor="#D9D9D9"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                app:layout_constraintStart_toEndOf="@id/btn5"
+                app:layout_constraintTop_toTopOf="@id/btn5"
+                android:layout_marginStart="12dp"/>
+
+            <Button
+                android:id="@+id/btn7"
+                android:text="7"
+                android:textColor="#D9D9D9"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                app:layout_constraintTop_toBottomOf="@id/btn5"
+                app:layout_constraintStart_toStartOf="@id/btn5"
+                android:layout_marginTop="20dp"
+                />
+
+            <Button
+                android:id="@+id/btn8"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                android:text="8"
+                android:textColor="#D9D9D9"
+                app:layout_constraintTop_toTopOf="@id/btn7"
+                app:layout_constraintStart_toEndOf="@id/btn7"
+                android:layout_marginStart="12dp"/>
+
+            <Button
+                android:id="@+id/btn9"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                android:textColor="#D9D9D9"
+                android:text="9"
+                app:layout_constraintTop_toBottomOf="@id/btn7"
+                app:layout_constraintEnd_toEndOf="@id/btn7"
+                android:layout_marginTop="20dp"/>
+
+            <Button
+                android:id="@+id/btn10"
+                android:background="@drawable/btn_notselect_seattype"
+                android:text="10"
+                android:textColor="#D9D9D9"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                app:layout_constraintStart_toEndOf="@id/btn9"
+                app:layout_constraintTop_toTopOf="@id/btn9"
+                android:layout_marginStart="12dp"/>
+
+            <Button
+                android:id="@+id/btn11"
+                android:textColor="#D9D9D9"
+                android:text="11"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                app:layout_constraintStart_toEndOf="@id/btn2"
+                app:layout_constraintTop_toTopOf="@id/btn2"
+                android:layout_marginStart="95dp"/>
+
+            <Button
+                android:id="@+id/btn12"
+                android:text="12"
+                android:textColor="#D9D9D9"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                app:layout_constraintStart_toEndOf="@id/btn11"
+                app:layout_constraintTop_toTopOf="@id/btn11"
+                android:layout_marginStart="12dp"/>
+
+            <Button
+                android:id="@+id/btn13"
+                android:background="@drawable/btn_notselect_seattype"
+                android:textColor="#D9D9D9"
+                android:text="13"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                app:layout_constraintStart_toStartOf="@id/btn11"
+                app:layout_constraintTop_toBottomOf="@id/btn11"
+                android:layout_marginTop="20dp"/>
+
+            <Button
+                android:id="@+id/btn14"
+                android:background="@drawable/btn_notselect_seattype"
+                android:text="14"
+                android:textColor="#d9d9d9"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                app:layout_constraintStart_toEndOf="@id/btn13"
+                app:layout_constraintTop_toTopOf="@id/btn13"
+                android:layout_marginStart="12dp"/>
+            <Button
+                android:id="@+id/btn15"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:textColor="#d9d9d9"
+                android:text="15"
+                android:background="@drawable/btn_notselect_seattype"
+                app:layout_constraintTop_toBottomOf="@id/btn13"
+                app:layout_constraintStart_toStartOf="@id/btn13"
+                android:layout_marginTop="20dp"/>
+            <Button
+                android:id="@+id/btn16"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                android:text="16"
+                android:textColor="#d9d9d9"
+                app:layout_constraintTop_toTopOf="@id/btn15"
+                app:layout_constraintStart_toEndOf="@id/btn15"
+                android:layout_marginStart="12dp"/>
+            <Button
+                android:id="@id/btn17"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                android:textColor="#d9d9d9"
+                android:text="17"
+                app:layout_constraintTop_toBottomOf="@id/btn15"
+                app:layout_constraintStart_toStartOf="@id/btn15"
+                android:layout_marginTop="20dp"
+                />
+            <Button
+                android:id="@+id/btn18"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                android:text="18"
+                android:textColor="#d9d9d9"
+                app:layout_constraintStart_toEndOf="@id/btn17"
+                app:layout_constraintTop_toBottomOf="@id/btn16"
+                app:layout_constraintEnd_toEndOf="@id/btn16"
+                android:layout_marginTop="20dp"/>
+
+            <Button
+                android:id="@+id/btn20"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_notselect_seattype"
+                android:text="20"
+                android:textColor="#d9d9d9"
+                app:layout_constraintStart_toStartOf="@id/btn18"
+                app:layout_constraintTop_toBottomOf="@id/btn18"
+                android:layout_marginTop="20dp"/>
+
+            <Button
+                android:id="@+id/btn19"
+                android:background="@drawable/btn_notselect_seattype"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:text="19"
+                android:textColor="#d9d9d9"
+                app:layout_constraintStart_toEndOf="@id/btn17"
+                app:layout_constraintTop_toBottomOf="@id/btn17"
+                app:layout_constraintEnd_toStartOf="@id/btn20"
+                app:layout_constraintBottom_toBottomOf="@id/btn20"
+                android:layout_marginEnd="12dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FF6319"
+            android:text="Booking"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/ChooseSeat"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

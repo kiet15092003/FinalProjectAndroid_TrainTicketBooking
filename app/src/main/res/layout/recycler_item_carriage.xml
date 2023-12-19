@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp">
+    <LinearLayout
+        android:id="@+id/btn_chooseCoach"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:background="@drawable/border"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:id="@+id/tv_Carriage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coach 3:"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:id="@+id/tv_SeatType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 4-berth sleeper"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="433k"
+            android:textColor="#FF6319"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

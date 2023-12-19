@@ -1,0 +1,7 @@
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gridItemButton"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:padding="8dp"
+    android:background="@drawable/button_seat_type"
+    android:text="A1"/>

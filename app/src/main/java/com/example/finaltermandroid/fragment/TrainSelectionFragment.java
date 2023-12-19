@@ -91,6 +91,12 @@ public class TrainSelectionFragment extends Fragment  implements TrainBookingAda
                         Toast.makeText(getContext(),"Please select all departure and arrival",Toast.LENGTH_LONG).show();
                     } else {
                         //Move to choose seat intent
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frame_layout, new SeatSelectionFragment(
+                                departureSelectedValue,arrivalSelectedValue,isReturn
+                        ));
+                        fragmentTransaction.commit();
                     }
                 } else{
                     String departureSelectedValue = tv_DepartureSelection.getText().toString();
@@ -98,6 +104,12 @@ public class TrainSelectionFragment extends Fragment  implements TrainBookingAda
                         Toast.makeText(getContext(),"Please select departure",Toast.LENGTH_LONG).show();
                     } else {
                         //Move to choose seat intent
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frame_layout, new SeatSelectionFragment(
+                                departureSelectedValue,"",isReturn
+                        ));
+                        fragmentTransaction.commit();
                     }
                 }
             }

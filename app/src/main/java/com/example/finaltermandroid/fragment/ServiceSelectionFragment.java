@@ -40,10 +40,14 @@ public class ServiceSelectionFragment extends Fragment implements TrainServiceAd
     private boolean isReturn;
     private boolean isChoseArrival = false;
     private String selectedDepartureInfoTrain,selectedArrivalInfoTrain;
-    public ServiceSelectionFragment(String selectedDepartureInfoTrain, String selectedArrivalInfoTrain, boolean isReturn){
+    private String selectedDepartureStationSchedule,selectedArrivalStationSchedule;
+    public ServiceSelectionFragment(String selectedDepartureInfoTrain, String selectedArrivalInfoTrain, boolean isReturn, String selectedDepartureStationSchedule,
+                                    String selectedArrivalStationSchedule){
         this.selectedDepartureInfoTrain =selectedDepartureInfoTrain;
         this.selectedArrivalInfoTrain = selectedArrivalInfoTrain;
         this.isReturn = isReturn;
+        this.selectedDepartureStationSchedule = selectedDepartureStationSchedule;
+        this.selectedArrivalStationSchedule = selectedArrivalStationSchedule;
     }
     @Nullable
     @Override
@@ -77,6 +81,7 @@ public class ServiceSelectionFragment extends Fragment implements TrainServiceAd
             tv_ArrivalSelection.setText(selectedArrivalNewInfo);
             tv_DepartureSelection.setText(selectedDepartureNewInfo);
         } else{
+            ll_arrival.setVisibility(View.GONE);
             String[] selectedDepartureInfoTrainArray = selectedDepartureInfoTrain.split(" - ");
             String selectedDepartureNewInfo = "- Train Number: "+selectedDepartureInfoTrainArray[0] + "\n"
                     + "- Departure Date: " +selectedDepartureInfoTrainArray[2] + "\n"
@@ -116,13 +121,13 @@ public class ServiceSelectionFragment extends Fragment implements TrainServiceAd
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.frame_layout, new CustomerSelectionFragment(tv_DepartureSelection.getText().toString(),
-                            tv_ArrivalSelection.getText().toString(),true));
+                            tv_ArrivalSelection.getText().toString(),true,selectedDepartureStationSchedule,selectedArrivalStationSchedule));
                     fragmentTransaction.commit();
                 } else {
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.frame_layout, new CustomerSelectionFragment(tv_DepartureSelection.getText().toString(),
-                            "",false));
+                            "",false,selectedDepartureStationSchedule,""));
                     fragmentTransaction.commit();
                 }
             }
@@ -163,7 +168,7 @@ public class ServiceSelectionFragment extends Fragment implements TrainServiceAd
                     + "- Seat Number: " + selectedArrivalInfoTrainArray[5]  + "\n"
                     + "- Seat Price: " + selectedArrivalInfoTrainArray[6] + "\n"
                     + "- Service: " + serviceName + "\n"
-                    + "- Service Price" + String.valueOf(price/1000) + "k";
+                    + "- Service Price: " + String.valueOf(price/1000) + "k";
             tv_ArrivalSelection.setText(selectedArrivalNewInfo);
         } else{
             String[] selectedDepartureInfoTrainArray = selectedDepartureInfoTrain.split(" - ");
@@ -174,7 +179,7 @@ public class ServiceSelectionFragment extends Fragment implements TrainServiceAd
                     + "- Seat Number: " + selectedDepartureInfoTrainArray[5] + "\n"
                     + "- Seat Price: " + selectedDepartureInfoTrainArray[6] + "\n"
                     + "- Service: " + serviceName + "\n"
-                    + "- Service Price" + String.valueOf(price/1000) + "k";
+                    + "- Service Price: " + String.valueOf(price/1000) + "k";
             tv_DepartureSelection.setText(selectedDepartureNewInfo);
         }
     }

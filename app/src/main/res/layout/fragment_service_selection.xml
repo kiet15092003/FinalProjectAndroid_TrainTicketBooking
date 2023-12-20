@@ -86,13 +86,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="295dp"
+        android:layout_height="265dp"
         android:id="@+id/rv_service">
 
     </androidx.recyclerview.widget.RecyclerView>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCustomer"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"

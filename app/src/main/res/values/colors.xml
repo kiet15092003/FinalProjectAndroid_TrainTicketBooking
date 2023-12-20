@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#FF6319</color>
     <color name="orangeLess">#e97451</color>
+    <color name="gray">#e5e5e5</color>
 </resources>

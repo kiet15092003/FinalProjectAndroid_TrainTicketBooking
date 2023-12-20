@@ -6,13 +6,23 @@ public class Account {
     String email;
     String password;
     String imgPath;
+    int point;
 
-    public Account(String name, String phoneNumber, String email, String password, String imgPath) {
+    public Account(String name, String phoneNumber, String email, String password, String imgPath, int point) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
         this.imgPath = imgPath;
+        this.point = point;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
     }
 
     public String getImgPath() {

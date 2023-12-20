@@ -106,7 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         new OnCompleteListener<AuthResult>() {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                                Account newAccount = new Account(name, phone, email, password, "imgPath");
+                                                Account newAccount = new Account(name, phone, email, password, "imgPath",0);
                                                 DatabaseReference accountRef = FirebaseDatabase.getInstance().getReference().child("accounts");
                                                 String userId = accountRef.push().getKey();
                                                 accountRef.child(userId).setValue(newAccount);

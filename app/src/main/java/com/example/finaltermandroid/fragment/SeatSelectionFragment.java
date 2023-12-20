@@ -4,12 +4,15 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,6 +38,7 @@ public class SeatSelectionFragment extends Fragment implements TrainCarriageAdap
     RecyclerView rv_TrainCarriage;
     TextView tv_DepartureSelection,tv_ArrivalSelection,tv_CoachInfo;
     LinearLayout ll_arrival;
+    Button btnChooseService;
     private String selectedDepartureInfoTrain,selectedArrivalInfoTrain;
     private boolean isReturn;
     private boolean isChoseArrival = false;
@@ -53,6 +57,7 @@ public class SeatSelectionFragment extends Fragment implements TrainCarriageAdap
         tv_ArrivalSelection = view.findViewById(R.id.tv_ArrivalSelection);
         ll_arrival = view.findViewById(R.id.ll_arrival);
         tv_CoachInfo = view.findViewById(R.id.tv_CoachInfo);
+        btnChooseService = view.findViewById(R.id.btnChooseService);
         if (isReturn){
             ll_arrival.setVisibility(View.VISIBLE);
             tv_ArrivalSelection.setText(selectedArrivalInfoTrain);
@@ -80,6 +85,38 @@ public class SeatSelectionFragment extends Fragment implements TrainCarriageAdap
         TrainSelectionSeatGridAdapter gridAdapter = new TrainSelectionSeatGridAdapter(getContext(), data, tv_DepartureSelection.getText().toString());
         gridAdapter.setOnItemSeatClickListener(SeatSelectionFragment.this);
         gridView.setAdapter(gridAdapter);
+
+        btnChooseService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isReturn){
+                    String[] departureInfo = tv_DepartureSelection.getText().toString().split(" - ");
+                    String[] arrivalInfo = tv_ArrivalSelection.getText().toString().split(" - ");
+                    if (departureInfo.length>3 && arrivalInfo.length>3){
+                        //move to service
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frame_layout, new ServiceSelectionFragment(tv_DepartureSelection.getText().toString(),
+                                tv_ArrivalSelection.getText().toString(),true));
+                        fragmentTransaction.commit();
+                    } else{
+                        Toast.makeText(getContext(),"Please choose seat for departure and arrival journey",Toast.LENGTH_LONG).show();
+                    }
+                } else{
+                    String[] departureInfo = tv_DepartureSelection.getText().toString().split(" - ");
+                    if (departureInfo.length>3){
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frame_layout, new ServiceSelectionFragment(tv_DepartureSelection.getText().toString(),
+                                "",false));
+                        fragmentTransaction.commit();
+                    }else{
+                        Toast.makeText(getContext(),"Please choose seat for departure",Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+
         return view;
     }
     private List<String> generateGridDataACSoftSeat(int carriageNumber){

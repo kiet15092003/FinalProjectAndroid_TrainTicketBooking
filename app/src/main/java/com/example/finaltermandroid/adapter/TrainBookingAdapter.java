@@ -41,7 +41,6 @@ public class TrainBookingAdapter extends RecyclerView.Adapter<TrainBookingAdapte
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         TrainSchedule trainSchedule = trainScheduleList.get(position);
-
         holder.tv_arrivalTime.setText(trainSchedule.getDestinationTime());
         holder.tv_trainNumber.setText(trainSchedule.getTrainNumber());
         DatabaseReference stationScheduleRef = FirebaseDatabase.getInstance().getReference().child("stationSchedule").child(trainSchedule.getStationSchedule());

@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.HomeFragment">
+    tools:context=".fragment.TicketFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTicket"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ticket Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"
-        android:textColor="@color/orange"/>
+        android:layout_marginBottom="50dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

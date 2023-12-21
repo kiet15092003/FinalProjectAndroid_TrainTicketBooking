@@ -159,21 +159,20 @@ public class CustomerSelectionFragment extends Fragment {
                         showPaymentSuccessDialog();
                         //Save customer info
                         DatabaseReference customerRefs = FirebaseDatabase.getInstance().getReference().child("customer");
-                        customerRefs.orderByChild("phoneNumber").equalTo(phone).addValueEventListener(new ValueEventListener() {
+                        customerRefs.orderByChild("phoneNumber").equalTo(phone).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 String i="a";
                                 if (snapshot.exists()){
-                                    i="b";
                                     for (DataSnapshot customerSnapShot: snapshot.getChildren()){
                                         String customerId = customerSnapShot.getKey();
-                                        Toast.makeText(getContext(),customerId,Toast.LENGTH_LONG).show();
                                         ProcessDataSaveNewSeat(customerId,tv_DepartureSelection.getText().toString(),selectedDepartureStationSchedule,selectedDepartureInfoTrain);
                                         if (isReturn){
                                             ProcessDataSaveNewSeat(customerId,tv_ArrivalSelection.getText().toString(),selectedArrivalStationSchedule,selectedArrivalInfoTrain);
                                         }
                                     }
                                 } else {
+                                    i = "c";
                                     String customerId = customerRefs.push().getKey();
                                     ProcessDataSaveNewCustomer(i,customerId,address,name,phone);
                                 }
@@ -290,7 +289,9 @@ public class CustomerSelectionFragment extends Fragment {
         return departureInfoMap;
     }
     private void ProcessData(String customerId, String discountKey, String seatBookedId, String serviceId, long totalMoney){
-        Ticket newTicket = new Ticket(customerId,discountKey,seatBookedId,serviceId,totalMoney);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        Ticket newTicket = new Ticket(customerId,discountKey,seatBookedId,serviceId,totalMoney,currentUser.getEmail());
         DatabaseReference ticketRefs = FirebaseDatabase.getInstance().getReference().child("ticket");
         String ticketId = ticketRefs.push().getKey();
         ticketRefs.child(ticketId).setValue(newTicket);
@@ -311,7 +312,6 @@ public class CustomerSelectionFragment extends Fragment {
                     String stationScheduleValue = trainScheduleSnapshot.child("stationSchedule").getValue(String.class);
                     if (departureTimeValue.equals(departureTime) && trainNumberValue.equals(departureTrainNumber)
                             && stationScheduleValue.equals(selectedStationSchedule)){
-                        Toast.makeText(getContext(),trainScheduleSnapshot.getKey(),Toast.LENGTH_LONG).show();
                         //Save new seatBooked
                         String trainScheduleId = trainScheduleSnapshot.getKey();
                         SeatBooked newSeatBooked = new SeatBooked(trainScheduleId,departureSeatNumber,departureSeatPrice);
@@ -363,6 +363,5 @@ public class CustomerSelectionFragment extends Fragment {
         if (isReturn){
             ProcessDataSaveNewSeat(customerId,tv_ArrivalSelection.getText().toString(),selectedArrivalStationSchedule,selectedArrivalInfoTrain);
         }
-        //Toast.makeText(getContext(),i,Toast.LENGTH_LONG).show();
     }
 }

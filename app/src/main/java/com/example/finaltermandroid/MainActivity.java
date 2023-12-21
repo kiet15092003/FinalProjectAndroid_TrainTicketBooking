@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.example.finaltermandroid.activity.LoginActivity;
 import com.example.finaltermandroid.fragment.HelpFragment;
-import com.example.finaltermandroid.fragment.HistoryFragment;
 import com.example.finaltermandroid.fragment.HomeFragment;
 import com.example.finaltermandroid.fragment.NotificationFragment;
 import com.example.finaltermandroid.fragment.ProfileFragment;
@@ -72,8 +71,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             replaceFragment(new HomeFragment());
         } else if (item.getItemId() == R.id.nav_ticket) {
             replaceFragment(new TicketFragment());
-        } else if (item.getItemId() == R.id.nav_history) {
-            replaceFragment(new HistoryFragment());
         } else if (item.getItemId() == R.id.nav_profile) {
             replaceFragment(new ProfileFragment());
         } else if (item.getItemId() == R.id.nav_setting) {
@@ -106,8 +103,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 replaceFragment(new HomeFragment());
             } if (item.getItemId() == R.id.bottom_ticket) {
                 replaceFragment(new TicketFragment());
-            } if (item.getItemId() == R.id.bottom_history) {
-                replaceFragment(new HistoryFragment());
+            } if (item.getItemId() == R.id.bottom_help) {
+                replaceFragment(new HelpFragment());
             } if (item.getItemId() == R.id.bottom_profile) {
                 replaceFragment(new ProfileFragment());
             }

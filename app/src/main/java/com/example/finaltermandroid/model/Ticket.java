@@ -6,13 +6,27 @@ public class Ticket {
     private String seatBookedId;
     private String serviceId;
     private long totalMoney;
+    private String accountEmail;
 
-    public Ticket(String customerId, String discountId, String seatBookedId, String serviceId, long totalMoney) {
+    public Ticket(String customerId, String discountId, String seatBookedId, String serviceId, long totalMoney, String accountEmail) {
+        this.accountEmail = accountEmail;
         this.customerId = customerId;
         this.discountId = discountId;
         this.seatBookedId = seatBookedId;
         this.serviceId = serviceId;
         this.totalMoney = totalMoney;
+    }
+
+    public Ticket(){
+
+    }
+
+    public String getAccountEmail() {
+        return accountEmail;
+    }
+
+    public void setAccountEmail(String accountEmail) {
+        this.accountEmail = accountEmail;
     }
 
     public String getCustomerId() {

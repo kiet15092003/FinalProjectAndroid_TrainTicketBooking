@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finaltermandroid.R;
@@ -153,7 +155,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.myViewHold
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     holder.tv_discountKey.setText(snapshot.child("discountKey").getValue(String.class));
-                    holder.tv_discountValue.setText(String.valueOf(snapshot.child("discountValue").getValue(Double.class)*10)+"%");
+                    holder.tv_discountValue.setText(String.valueOf(snapshot.child("discountValue").getValue(Double.class)*100)+"%");
                 }
 
                 @Override
@@ -166,6 +168,15 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.myViewHold
             holder.tv_discountValue.setText("0%");
         }
         holder.tv_totalPayment.setText(String.valueOf(ticket.getTotalMoney()/1000) + "k");
+        int positionTicket = position;
+        holder.btnViewETicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.OnButtonETicketClick(positionTicket);
+                }
+            }
+        });
     }
 
     @Override
@@ -203,5 +214,13 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.myViewHold
             detailView = itemView.findViewById(R.id.detailView);
             recCard = itemView.findViewById(R.id.recCard);
         }
+    }
+    public interface OnButtonETicketClickListener {
+        void OnButtonETicketClick(int position);
+    }
+    private TicketAdapter.OnButtonETicketClickListener listener;
+
+    public void setOnButtonETicketClickListener(TicketAdapter.OnButtonETicketClickListener listener) {
+        this.listener = listener;
     }
 }

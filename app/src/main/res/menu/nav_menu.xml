@@ -19,6 +19,10 @@
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_nav_profile"
             android:title="Profile"/>
+        <item
+            android:id="@+id/nav_point"
+            android:icon="@drawable/ic_point_discount"
+            android:title="Point and discount"/>
     </group>
     <item
         android:title="">

@@ -166,15 +166,15 @@ public class CustomerSelectionFragment extends Fragment {
                                 if (snapshot.exists()){
                                     for (DataSnapshot customerSnapShot: snapshot.getChildren()){
                                         String customerId = customerSnapShot.getKey();
-                                        ProcessDataSaveNewSeat(customerId,tv_DepartureSelection.getText().toString(),selectedDepartureStationSchedule,selectedDepartureInfoTrain);
+                                        ProcessDataSaveNewSeat(selectedDiscount, discountKey,customerId,tv_DepartureSelection.getText().toString(),selectedDepartureStationSchedule,selectedDepartureInfoTrain);
                                         if (isReturn){
-                                            ProcessDataSaveNewSeat(customerId,tv_ArrivalSelection.getText().toString(),selectedArrivalStationSchedule,selectedArrivalInfoTrain);
+                                            ProcessDataSaveNewSeat(selectedDiscount,discountKey,customerId,tv_ArrivalSelection.getText().toString(),selectedArrivalStationSchedule,selectedArrivalInfoTrain);
                                         }
                                     }
                                 } else {
                                     i = "c";
                                     String customerId = customerRefs.push().getKey();
-                                    ProcessDataSaveNewCustomer(i,customerId,address,name,phone);
+                                    ProcessDataSaveNewCustomer(i,selectedDiscount,discountKey,customerId,address,name,phone);
                                 }
                             }
                             @Override
@@ -183,9 +183,9 @@ public class CustomerSelectionFragment extends Fragment {
                             }
                         });
                         //Delete discount
-                        if (!discountKey.equals("")){
+                        if (!discountKey.equals("Choose discount")){
                             DatabaseReference discountReference = FirebaseDatabase.getInstance().getReference("discount");
-                            discountReference.child(discountKey).removeValue();
+                            discountReference.child(discountKey).child("status").setValue(false);
                         }
                     }
                 }
@@ -240,7 +240,8 @@ public class CustomerSelectionFragment extends Fragment {
                     chooseDiscount.setDiscountValue(0);
                     discountList.add(0, chooseDiscount);
                     for (DataSnapshot discountSnapshot : snapshot.getChildren()) {
-                        if (discountSnapshot.child("accountEmail").getValue(String.class).toString().equals(email)){
+                        if (discountSnapshot.child("accountEmail").getValue(String.class).toString().equals(email)
+                            && discountSnapshot.child("status").getValue(Boolean.class)==true){
                             Discount discount = discountSnapshot.getValue(Discount.class);
                             discountList.add(discount);
                         }
@@ -288,7 +289,7 @@ public class CustomerSelectionFragment extends Fragment {
         }
         return departureInfoMap;
     }
-    private void ProcessData(String customerId, String discountKey, String seatBookedId, String serviceId, long totalMoney){
+    private void ProcessData(String customerId, double selectedDiscount, String discountKey, String seatBookedId, String serviceId, long totalMoney){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         Ticket newTicket = new Ticket(customerId,discountKey,seatBookedId,serviceId,totalMoney,currentUser.getEmail());
@@ -296,7 +297,7 @@ public class CustomerSelectionFragment extends Fragment {
         String ticketId = ticketRefs.push().getKey();
         ticketRefs.child(ticketId).setValue(newTicket);
     }
-    private void ProcessDataSaveNewSeat(String customerId, String departureSelection, String selectedStationSchedule, String selectedInfoTrain){
+    private void ProcessDataSaveNewSeat(double selectedDiscount, String discountKey, String customerId, String departureSelection, String selectedStationSchedule, String selectedInfoTrain){
         Map<String, String> departureInfoMap = extractInformation(departureSelection);
         String departureTime = departureInfoMap.get("Departure Time");
         long departureSeatPrice = Long.parseLong(departureInfoMap.get("Seat Price").substring(0, departureInfoMap.get("Seat Price").length() - 1))*1000;
@@ -325,7 +326,7 @@ public class CustomerSelectionFragment extends Fragment {
                         long totalMoney = (long) ((long) (seatPrice+servicePrice) - (seatPrice+servicePrice)*selectedDiscount);
                         ////Get serviceId
                         if (servicePrice==0){
-                            ProcessData(customerId,discountKey,seatId,"Not service",totalMoney);
+                            ProcessData(customerId,selectedDiscount,discountKey,seatId,"Not service",totalMoney);
                         } else {
                             DatabaseReference serviceRefs = FirebaseDatabase.getInstance().getReference().child("service");
                             serviceRefs.addValueEventListener(new ValueEventListener() {
@@ -334,7 +335,7 @@ public class CustomerSelectionFragment extends Fragment {
                                     for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                                         if (dataSnapshot.child("price").getValue(Long.class)==servicePrice){
                                             String serviceId = dataSnapshot.getKey();
-                                            ProcessData(customerId,discountKey,seatId,serviceId,totalMoney);
+                                            ProcessData(customerId,selectedDiscount,discountKey,seatId,serviceId,totalMoney);
                                         }
                                     }
                                 }
@@ -355,13 +356,13 @@ public class CustomerSelectionFragment extends Fragment {
             }
         });
     }
-    private void ProcessDataSaveNewCustomer(String i,String customerId,String address,String name, String phone){
+    private void ProcessDataSaveNewCustomer(String i,double selectedDiscount, String discountKey, String customerId,String address,String name, String phone){
         Customer newCustomer = new Customer(address,name, phone);
         DatabaseReference customerRef = FirebaseDatabase.getInstance().getReference().child("customer");
         customerRef.child(customerId).setValue(newCustomer);
-        ProcessDataSaveNewSeat(customerId,tv_DepartureSelection.getText().toString(),selectedDepartureStationSchedule,selectedDepartureInfoTrain);
+        ProcessDataSaveNewSeat(selectedDiscount,discountKey,customerId,tv_DepartureSelection.getText().toString(),selectedDepartureStationSchedule,selectedDepartureInfoTrain);
         if (isReturn){
-            ProcessDataSaveNewSeat(customerId,tv_ArrivalSelection.getText().toString(),selectedArrivalStationSchedule,selectedArrivalInfoTrain);
+            ProcessDataSaveNewSeat(selectedDiscount,discountKey,customerId,tv_ArrivalSelection.getText().toString(),selectedArrivalStationSchedule,selectedArrivalInfoTrain);
         }
     }
 }

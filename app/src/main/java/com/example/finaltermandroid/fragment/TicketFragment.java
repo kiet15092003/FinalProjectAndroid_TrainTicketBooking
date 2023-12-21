@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketFragment extends Fragment {
+public class TicketFragment extends Fragment implements TicketAdapter.OnButtonETicketClickListener{
     RecyclerView recyclerTicket;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +50,7 @@ public class TicketFragment extends Fragment {
                     ticketList.add(ticket);
                 }
                 TicketAdapter adapter = new TicketAdapter(ticketList,getContext());
-                //adapter.setOnItemClickListener(SeatSelectionFragment.this);
+                adapter.setOnButtonETicketClickListener(TicketFragment.this);
                 recyclerTicket.setAdapter(adapter);
             }
 
@@ -58,5 +60,13 @@ public class TicketFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void OnButtonETicketClick(int position) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, new ETicketFragment(position));
+        fragmentTransaction.commit();
     }
 }

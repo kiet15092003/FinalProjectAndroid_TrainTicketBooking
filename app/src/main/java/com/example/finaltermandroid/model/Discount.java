@@ -4,14 +4,23 @@ public class Discount {
     private String accountEmail;
     private String discountKey;
     private double discountValue;
-
+    private boolean status;
     public Discount(){
 
     }
-    public Discount(String accountEmail, String discountKey, double discountValue) {
+    public Discount(String accountEmail, String discountKey, double discountValue, boolean status) {
         this.accountEmail = accountEmail;
         this.discountKey = discountKey;
         this.discountValue = discountValue;
+        this.status = status;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public String getAccountEmail() {

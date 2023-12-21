@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
 
         android:layout_width="match_parent"
-        android:layout_height="370dp"
+        android:layout_height="400dp"
         android:id="@+id/recCard"
         app:cardElevation="8dp"
         app:cardCornerRadius="16dp"
@@ -27,6 +27,7 @@
                 android:layout_weight="2.5"
                 android:orientation="horizontal">
                 <LinearLayout
+                    android:layout_marginLeft="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -125,42 +126,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1.7"
-                android:weightSum="5"
+                android:weightSum="3.5"
                 android:paddingStart="8dp"
                 android:orientation="horizontal"
                 android:background="@drawable/card_border">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1.5"
-                    android:layout_gravity="center">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Train: "
-                            android:textColor="@color/black"
-                            android:textSize="18dp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:id="@+id/tv_trainNumber"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="SE22"
-                            android:textColor="@color/black"
-                            android:textSize="18dp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </LinearLayout>
                 <Button
                     android:layout_marginRight="10dp"
-                    android:id="@+id/btn_Detail"
+                    android:id="@+id/btn_shareTrain"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_border"
+                    android:text="Share train"
+                    android:textColor="@color/orange"
+                    />
+                <Button
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/btn_StationMap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_gravity="center"
                     android:background="@drawable/button_border"
                     android:text="STATION MAP"
@@ -170,7 +156,7 @@
                     android:id="@+id/btnViewETicket"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
+                    android:layout_weight="1"
                     android:layout_gravity="center"
                     android:background="@drawable/button_border"
                     android:text="View E-ticket"
@@ -185,6 +171,26 @@
                 android:layout_height="0dp"
                 android:layout_weight="4.8"
                 android:orientation="vertical">
+                <LinearLayout
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Train: "/>
+                    <TextView
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/orange"
+                        android:id="@+id/tv_trainNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SE22"/>
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

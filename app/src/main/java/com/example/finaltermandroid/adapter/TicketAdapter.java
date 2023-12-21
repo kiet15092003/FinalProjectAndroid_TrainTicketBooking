@@ -178,7 +178,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.myViewHold
                 tv_destinationStation,tv_trainNumber,tv_customerName,tv_seatNumber,tv_serviceName,tv_discountKey,
                 tv_seatPrice,tv_servicePrice,tv_discountValue,tv_totalPayment;
         LinearLayout detailView;
-        Button btn_Detail,btnViewETicket;
+        Button btn_shareTrain,btn_StationMap,btnViewETicket;
         CardView recCard;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -197,8 +197,9 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.myViewHold
             tv_servicePrice = itemView.findViewById(R.id.tv_servicePrice);
             tv_discountValue = itemView.findViewById(R.id.tv_discountValue);
             tv_totalPayment = itemView.findViewById(R.id.tv_totalPayment);
-            btn_Detail = itemView.findViewById(R.id.btn_Detail);
+            btn_shareTrain = itemView.findViewById(R.id.btn_shareTrain);
             btnViewETicket = itemView.findViewById(R.id.btnViewETicket);
+            btn_StationMap = itemView.findViewById(R.id.btn_StationMap);
             detailView = itemView.findViewById(R.id.detailView);
             recCard = itemView.findViewById(R.id.recCard);
         }

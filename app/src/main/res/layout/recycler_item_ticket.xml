@@ -279,6 +279,7 @@
                         android:text="150k "/>
                 </LinearLayout>
                 <LinearLayout
+                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -297,12 +298,9 @@
                         android:layout_height="wrap_content"
                         android:text="-Njsajdkasdasda"/>
                     <TextView
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:text=" - "/>
                     <TextView
                         android:id="@+id/tv_discountValue"

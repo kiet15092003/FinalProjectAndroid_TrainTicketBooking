@@ -11,8 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.finaltermandroid.R;
+import com.example.finaltermandroid.fragment.HomeFragment;
 import com.example.finaltermandroid.fragment.ProfileFragment;
 
 public class PaymentSuccessDialog extends DialogFragment {
@@ -34,7 +37,11 @@ public class PaymentSuccessDialog extends DialogFragment {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Move to E-ticket fragment
+                //Back to home fragment
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, new HomeFragment());
+                fragmentTransaction.commit();
             }
         });
         return view;

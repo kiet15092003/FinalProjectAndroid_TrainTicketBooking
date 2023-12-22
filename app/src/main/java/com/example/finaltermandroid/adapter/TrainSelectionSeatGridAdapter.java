@@ -103,7 +103,6 @@ public class TrainSelectionSeatGridAdapter extends BaseAdapter {
                                             });
                                         }
                                     }
-
                                 }
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {

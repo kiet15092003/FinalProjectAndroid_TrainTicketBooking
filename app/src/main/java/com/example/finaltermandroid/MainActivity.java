@@ -19,6 +19,7 @@ import com.example.finaltermandroid.activity.LoginActivity;
 import com.example.finaltermandroid.fragment.HelpFragment;
 import com.example.finaltermandroid.fragment.HomeFragment;
 import com.example.finaltermandroid.fragment.NotificationFragment;
+import com.example.finaltermandroid.fragment.PointFragment;
 import com.example.finaltermandroid.fragment.ProfileFragment;
 import com.example.finaltermandroid.fragment.SettingFragment;
 import com.example.finaltermandroid.fragment.TicketFragment;
@@ -79,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             replaceFragment(new HelpFragment());
         } else if (item.getItemId() == R.id.nav_notification) {
             replaceFragment(new NotificationFragment());
+        } else if (item.getItemId() == R.id.nav_point) {
+            replaceFragment(new PointFragment());
         } else if (item.getItemId() == R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);

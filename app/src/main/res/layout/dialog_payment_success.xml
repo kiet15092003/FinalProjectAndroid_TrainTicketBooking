@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
-        android:text="Please touch OK to see your E-ticket"
+        android:text="Please touch OK to back to home"
         />
     <LinearLayout
         android:layout_width="match_parent"

@@ -158,30 +158,7 @@ public class CustomerSelectionFragment extends Fragment {
                         //Show dialog and save to firebase
                         showPaymentSuccessDialog();
                         //Save customer info
-                        DatabaseReference customerRefs = FirebaseDatabase.getInstance().getReference().child("customer");
-                        customerRefs.orderByChild("phoneNumber").equalTo(phone).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String i="a";
-                                if (snapshot.exists()){
-                                    for (DataSnapshot customerSnapShot: snapshot.getChildren()){
-                                        String customerId = customerSnapShot.getKey();
-                                        ProcessDataSaveNewSeat(selectedDiscount, discountKey,customerId,tv_DepartureSelection.getText().toString(),selectedDepartureStationSchedule,selectedDepartureInfoTrain);
-                                        if (isReturn){
-                                            ProcessDataSaveNewSeat(selectedDiscount,discountKey,customerId,tv_ArrivalSelection.getText().toString(),selectedArrivalStationSchedule,selectedArrivalInfoTrain);
-                                        }
-                                    }
-                                } else {
-                                    i = "c";
-                                    String customerId = customerRefs.push().getKey();
-                                    ProcessDataSaveNewCustomer(i,selectedDiscount,discountKey,customerId,address,name,phone);
-                                }
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
+                        ProcessMoveToSave(phone, selectedDiscount, discountKey,address,name);
                         //Delete discount
                         if (!discountKey.equals("Choose discount")){
                             DatabaseReference discountReference = FirebaseDatabase.getInstance().getReference("discount");
@@ -289,6 +266,32 @@ public class CustomerSelectionFragment extends Fragment {
         }
         return departureInfoMap;
     }
+    private void ProcessMoveToSave(String phone, double selectedDiscount, String discountKey, String address, String name){
+        DatabaseReference customerRefs = FirebaseDatabase.getInstance().getReference().child("customer");
+        customerRefs.orderByChild("phoneNumber").equalTo(phone).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String i="a";
+                if (snapshot.exists()){
+                    for (DataSnapshot customerSnapShot: snapshot.getChildren()){
+                        String customerId = customerSnapShot.getKey();
+                        ProcessDataSaveNewSeat(selectedDiscount, discountKey,customerId,tv_DepartureSelection.getText().toString(),selectedDepartureStationSchedule,selectedDepartureInfoTrain);
+                        if (isReturn){
+                            ProcessDataSaveNewSeat(selectedDiscount,discountKey,customerId,tv_ArrivalSelection.getText().toString(),selectedArrivalStationSchedule,selectedArrivalInfoTrain);
+                        }
+                    }
+                } else {
+                    i = "c";
+                    String customerId = customerRefs.push().getKey();
+                    ProcessDataSaveNewCustomer(i,selectedDiscount,discountKey,customerId,address,name,phone);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void ProcessData(String customerId, double selectedDiscount, String discountKey, String seatBookedId, String serviceId, long totalMoney){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -301,6 +304,28 @@ public class CustomerSelectionFragment extends Fragment {
         Map<String, String> departureInfoMap = extractInformation(departureSelection);
         String departureTime = departureInfoMap.get("Departure Time");
         long departureSeatPrice = Long.parseLong(departureInfoMap.get("Seat Price").substring(0, departureInfoMap.get("Seat Price").length() - 1))*1000;
+        //set account new point
+        DatabaseReference accountRefs = FirebaseDatabase.getInstance().getReference().child("accounts");
+        accountRefs.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                FirebaseUser currentUser = mAuth.getCurrentUser();
+                String emailUser = currentUser.getEmail();
+                for (DataSnapshot snapshot1: snapshot.getChildren()){
+                    if (snapshot1.child("email").getValue(String.class).equals(emailUser)){
+                        accountRefs.child(snapshot1.getKey()).child("point").setValue(
+                                snapshot1.child("point").getValue(Integer.class) + (int)(departureSeatPrice/7070));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         String departureSeatNumber = departureInfoMap.get("Seat Number");
         String departureTrainNumber = departureInfoMap.get("Train Number");
         DatabaseReference trainScheduleRefs = FirebaseDatabase.getInstance().getReference().child("trainSchedule");

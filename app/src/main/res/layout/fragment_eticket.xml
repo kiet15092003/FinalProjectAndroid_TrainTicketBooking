@@ -286,6 +286,7 @@
                     android:text="150k "/>
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -294,7 +295,7 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Discount code: "/>
+                    android:text="Discount key: "/>
                 <TextView
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -304,10 +305,6 @@
                     android:layout_height="wrap_content"
                     android:text="-Njsajdkasdasda"/>
                 <TextView
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" - "/>
@@ -343,7 +340,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
                 <TextView
                     android:textSize="15dp"
                     android:textStyle="bold"

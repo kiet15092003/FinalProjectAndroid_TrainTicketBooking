@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    android:elevation="6dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/orangeLess"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:padding="15dp">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_imgSrc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_notifications"
+            android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:58 22/12/2023"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:textColor="#000"
+            android:layout_toRightOf="@+id/iv_imgSrc"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="You have the journey leaving in 7 days, please focus your ticket -NmEed0cquzKgI5nC8-F"
+            android:textSize="15dp"
+            android:textColor="#000"
+            android:layout_toRightOf="@+id/iv_imgSrc"
+            android:layout_below="@+id/tv_time"
+            android:layout_marginLeft="10dp"
+            />
+        <ImageView
+            android:id="@+id/btn_DeleteNotification"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete"
+            android:layout_toRightOf="@+id/tv_message"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="16dp"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -1,5 +1,9 @@
 package com.example.finaltermandroid.fragment;
 
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.format.DateTimeFormatter;
+import org.threeten.bp.temporal.ChronoUnit;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -28,6 +32,7 @@ import com.example.finaltermandroid.dialog.PaymentSuccessDialog;
 import com.example.finaltermandroid.model.Account;
 import com.example.finaltermandroid.model.Customer;
 import com.example.finaltermandroid.model.Discount;
+import com.example.finaltermandroid.model.Notification;
 import com.example.finaltermandroid.model.SeatBooked;
 import com.example.finaltermandroid.model.Ticket;
 import com.example.finaltermandroid.model.TrainStation;
@@ -41,10 +46,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -292,13 +301,30 @@ public class CustomerSelectionFragment extends Fragment {
             }
         });
     }
-    private void ProcessData(String customerId, double selectedDiscount, String discountKey, String seatBookedId, String serviceId, long totalMoney){
+    private void ProcessData(String customerId, double selectedDiscount, String discountKey, String seatBookedId, String serviceId, long totalMoney,String departureSelection){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         Ticket newTicket = new Ticket(customerId,discountKey,seatBookedId,serviceId,totalMoney,currentUser.getEmail());
         DatabaseReference ticketRefs = FirebaseDatabase.getInstance().getReference().child("ticket");
         String ticketId = ticketRefs.push().getKey();
         ticketRefs.child(ticketId).setValue(newTicket);
+
+        //Save new notification
+        String message1 = "You have successfully booked the ticket with code " + ticketId;
+        ProcessSaveNewNotification(message1);
+        //Save next notification
+        Map<String, String> departureInfoMap = extractInformation(departureSelection);
+        String departureDate = departureInfoMap.get("Departure Date");
+        LocalDate departureDates = LocalDate.parse(departureDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate currentDates = LocalDate.now();
+        long daysDifference = ChronoUnit.DAYS.between(currentDates, departureDates);
+        if (daysDifference==0){
+            String message3 = "You have the journey leaving today, please focus your ticket " + ticketId;
+            ProcessSaveNewNotification(message3);
+        } else{
+            String message3 = "You have the journey leaving in " + String.valueOf(daysDifference) + " days, please focus your ticket " + ticketId;
+            ProcessSaveNewNotification(message3);
+        }
     }
     private void ProcessDataSaveNewSeat(double selectedDiscount, String discountKey, String customerId, String departureSelection, String selectedStationSchedule, String selectedInfoTrain){
         Map<String, String> departureInfoMap = extractInformation(departureSelection);
@@ -351,7 +377,7 @@ public class CustomerSelectionFragment extends Fragment {
                         long totalMoney = (long) ((long) (seatPrice+servicePrice) - (seatPrice+servicePrice)*selectedDiscount);
                         ////Get serviceId
                         if (servicePrice==0){
-                            ProcessData(customerId,selectedDiscount,discountKey,seatId,"Not service",totalMoney);
+                            ProcessData(customerId,selectedDiscount,discountKey,seatId,"Not service",totalMoney,departureSelection);
                         } else {
                             DatabaseReference serviceRefs = FirebaseDatabase.getInstance().getReference().child("service");
                             serviceRefs.addValueEventListener(new ValueEventListener() {
@@ -360,7 +386,7 @@ public class CustomerSelectionFragment extends Fragment {
                                     for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                                         if (dataSnapshot.child("price").getValue(Long.class)==servicePrice){
                                             String serviceId = dataSnapshot.getKey();
-                                            ProcessData(customerId,selectedDiscount,discountKey,seatId,serviceId,totalMoney);
+                                            ProcessData(customerId,selectedDiscount,discountKey,seatId,serviceId,totalMoney,departureSelection);
                                         }
                                     }
                                 }
@@ -389,5 +415,22 @@ public class CustomerSelectionFragment extends Fragment {
         if (isReturn){
             ProcessDataSaveNewSeat(selectedDiscount,discountKey,customerId,tv_ArrivalSelection.getText().toString(),selectedArrivalStationSchedule,selectedArrivalInfoTrain);
         }
+    }
+    private void ProcessSaveNewNotification(String message){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String accountEmail = currentUser.getEmail();
+        Date currentTime = new Date();
+        String dateFormat = getCurrentDateTime();
+        Notification notification = new Notification(accountEmail,message,dateFormat);
+        DatabaseReference notificationRefs = FirebaseDatabase.getInstance().getReference().child("notification");
+        String notificationId = notificationRefs.push().getKey();
+        notificationRefs.child(notificationId).setValue(notification);
+    }
+    public static String getCurrentDateTime() {
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy", Locale.getDefault());
+        return dateFormat.format(currentDate);
     }
 }

@@ -1,7 +1,11 @@
 package com.example.finaltermandroid.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,14 +13,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.finaltermandroid.MainActivity;
 import com.example.finaltermandroid.R;
 import com.example.finaltermandroid.activity.LoginActivity;
 import com.example.finaltermandroid.dialog.EditPasswordDialog;
 import com.example.finaltermandroid.dialog.EditPhoneDialog;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -27,12 +37,36 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class ProfileFragment extends Fragment {
     TextView tvName, tv_phoneNumberValue,tv_emailValue,tv_passwordValue;
-    ImageView iv_editPhoneNumber,iv_editPassword;
+    ImageView iv_editPhoneNumber,iv_editPassword, iv_img;
     MaterialButton btnLogout;
     private String oldPasswordValue;
+    ActivityResultLauncher<Intent> imagePickLauncher;
+    Uri selectedImageUri;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        imagePickLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        if (data != null && data.getData() != null) {
+                            selectedImageUri = data.getData();
+                            setProfilePic(getContext(), selectedImageUri, iv_img);
+                            uploadImageToFirebaseStorage(selectedImageUri);
+                        }
+                    }
+                });
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,6 +78,7 @@ public class ProfileFragment extends Fragment {
         iv_editPhoneNumber = (ImageView) view.findViewById(R.id.iv_editPhoneNumber);
         iv_editPassword = (ImageView) view.findViewById(R.id.iv_editPassword);
         btnLogout = view.findViewById(R.id.btnLogout);
+        iv_img = (ImageView) view.findViewById(R.id.iv_img);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +114,17 @@ public class ProfileFragment extends Fragment {
                                     tvName.setText(name);
                                     tv_emailValue.setText(email);
                                     tv_phoneNumberValue.setText(phoneNumber);
+                                    StorageReference storageRef = FirebaseStorage.getInstance().getReference().child(imgPath);
+                                    storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                                        Glide.with(requireContext())
+                                                .load(uri)
+                                                .apply(RequestOptions.circleCropTransform())
+                                                .into(iv_img);
+                                    }).addOnFailureListener(exception -> {
+                                        exception.printStackTrace();
+                                        Log.e("ProfileFragment", "Failed to load image from Firebase Storage: " + exception.getMessage());
+                                    });
+
                                     String passwordNotShow = "*";
                                     for (int i=1;i<password.length();i++){
                                         passwordNotShow += "*";
@@ -112,6 +158,16 @@ public class ProfileFragment extends Fragment {
                 }
             });
         }
+        iv_img.setOnClickListener((v) -> {
+            ImagePicker.with(this).cropSquare().compress(512).maxResultSize(512,512)
+                    .createIntent(new Function1<Intent, Unit>() {
+                        @Override
+                        public Unit invoke(Intent intent) {
+                            imagePickLauncher.launch(intent);
+                            return null;
+                        }
+                    });
+        });
         return view;
     }
 
@@ -205,4 +261,55 @@ public class ProfileFragment extends Fragment {
             }
         }
     }
+    public static void setProfilePic(Context context, Uri imageUri, ImageView imageView){
+        Glide.with(context).load(imageUri).apply(RequestOptions.circleCropTransform()).into(imageView);
+    }
+
+    private void uploadImageToFirebaseStorage(Uri imageUri) {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+
+        StorageReference imagesRef = storageRef.child("profile_images");
+
+        String imageName = "image_" + System.currentTimeMillis() + ".jpg";
+        StorageReference imageRef = imagesRef.child(imageName);
+
+        // Upload file to Firebase Storage
+        imageRef.putFile(imageUri)
+                .addOnSuccessListener(taskSnapshot -> {
+                    imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                        String imageUrl = uri.toString();
+                        saveImageUrlToFirebaseDatabase(imageUrl);
+                    });
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+
+    private void saveImageUrlToFirebaseDatabase(String imageUrl) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser != null) {
+            String email = currentUser.getEmail();
+            DatabaseReference accountRefs = FirebaseDatabase.getInstance().getReference().child("accounts");
+            accountRefs.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot accountSnapshot : snapshot.getChildren()) {
+                        String accountId =  accountSnapshot.getKey();
+                        DatabaseReference accountRef = FirebaseDatabase.getInstance().getReference().child("accounts").child(accountId);
+                        accountRef.child("imgPath").setValue(imageUrl);
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+    }
+
 }

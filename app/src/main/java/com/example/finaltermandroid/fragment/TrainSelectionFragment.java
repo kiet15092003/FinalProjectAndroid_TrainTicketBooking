@@ -39,16 +39,22 @@ public class TrainSelectionFragment extends Fragment  implements TrainBookingAda
     private String selectedDepartureStationSchedule,selectedArrivalStationSchedule;
     TextView tv_DepartureSelection,tv_ArrivalSelection;
     Button btnChooseSeat;
+    private int numberOfCustomer;
+    private int currentCustomer;
     private boolean isReturn;
 
-    public TrainSelectionFragment(String selectedDepartureStationSchedule, boolean isReturn){
+    public TrainSelectionFragment(String selectedDepartureStationSchedule, boolean isReturn, int numberOfCustomer, int currentCustomer){
         this.selectedDepartureStationSchedule =selectedDepartureStationSchedule;
         this.isReturn = isReturn;
+        this.numberOfCustomer = numberOfCustomer;
+        this.currentCustomer = currentCustomer;
     }
-    public TrainSelectionFragment(String selectedDepartureStationSchedule, String selectedArrivalStationSchedule,  boolean isReturn){
+    public TrainSelectionFragment(String selectedDepartureStationSchedule, String selectedArrivalStationSchedule,  boolean isReturn, int numberOfCustomer,int currentCustomer){
         this.selectedArrivalStationSchedule =selectedArrivalStationSchedule;
         this.selectedDepartureStationSchedule = selectedDepartureStationSchedule;
         this.isReturn = isReturn;
+        this.numberOfCustomer = numberOfCustomer;
+        this.currentCustomer = currentCustomer;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,7 +100,7 @@ public class TrainSelectionFragment extends Fragment  implements TrainBookingAda
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.frame_layout, new SeatSelectionFragment(
-                                departureSelectedValue,arrivalSelectedValue,isReturn,selectedDepartureStationSchedule,selectedArrivalStationSchedule
+                                departureSelectedValue,arrivalSelectedValue,isReturn,selectedDepartureStationSchedule,selectedArrivalStationSchedule,currentCustomer,numberOfCustomer
                         ));
                         fragmentTransaction.commit();
                     }
@@ -107,7 +113,7 @@ public class TrainSelectionFragment extends Fragment  implements TrainBookingAda
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.frame_layout, new SeatSelectionFragment(
-                                departureSelectedValue,"",isReturn,selectedDepartureStationSchedule,""
+                                departureSelectedValue,"",isReturn,selectedDepartureStationSchedule,"",currentCustomer,numberOfCustomer
                         ));
                         fragmentTransaction.commit();
                     }

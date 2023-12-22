@@ -36,19 +36,28 @@ import java.util.List;
 public class SeatSelectionFragment extends Fragment implements TrainCarriageAdapter.OnItemClickListener, TrainSelectionSeatGridAdapter.OnItemSeatClickListener{
     GridView gridView;
     RecyclerView rv_TrainCarriage;
-    TextView tv_DepartureSelection,tv_ArrivalSelection,tv_CoachInfo;
+    TextView tv_DepartureSelection,tv_ArrivalSelection,tv_CoachInfo, tv_CustomerCurrent, tv_CustomerTotal;
     LinearLayout ll_arrival;
     Button btnChooseService;
     private String selectedDepartureInfoTrain,selectedArrivalInfoTrain;
     private String selectedDepartureStationSchedule,selectedArrivalStationSchedule;
     private boolean isReturn;
     private boolean isChoseArrival = false;
-    public SeatSelectionFragment(String selectedDepartureInfoTrain,String selectedArrivalInfoTrain, boolean isReturn, String selectedDepartureStationSchedule, String selectedArrivalStationSchedule){
+    private int numberOfCustomer;
+    private int currentCustomer;
+    public SeatSelectionFragment(String selectedDepartureInfoTrain,
+                                 String selectedArrivalInfoTrain,
+                                 boolean isReturn,
+                                 String selectedDepartureStationSchedule,
+                                 String selectedArrivalStationSchedule
+        , int  currentCustomer, int numberOfCustomer){
         this.selectedArrivalInfoTrain = selectedArrivalInfoTrain;
         this.selectedDepartureInfoTrain = selectedDepartureInfoTrain;
         this.isReturn = isReturn;
         this.selectedDepartureStationSchedule = selectedDepartureStationSchedule;
         this.selectedArrivalStationSchedule = selectedArrivalStationSchedule;
+        this.numberOfCustomer = numberOfCustomer;
+        this.currentCustomer = currentCustomer;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,6 +70,13 @@ public class SeatSelectionFragment extends Fragment implements TrainCarriageAdap
         ll_arrival = view.findViewById(R.id.ll_arrival);
         tv_CoachInfo = view.findViewById(R.id.tv_CoachInfo);
         btnChooseService = view.findViewById(R.id.btnChooseService);
+
+
+        tv_CustomerCurrent = view.findViewById(R.id.tv_CustomerCurrent);
+        tv_CustomerTotal = view.findViewById(R.id.tv_CustomerTotal);
+        tv_CustomerCurrent.setText(String.valueOf(currentCustomer));
+        tv_CustomerTotal.setText(String.valueOf(numberOfCustomer));
+
         if (isReturn){
             ll_arrival.setVisibility(View.VISIBLE);
             tv_ArrivalSelection.setText(selectedArrivalInfoTrain);
@@ -99,8 +115,12 @@ public class SeatSelectionFragment extends Fragment implements TrainCarriageAdap
                         //move to service
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.frame_layout, new ServiceSelectionFragment(tv_DepartureSelection.getText().toString(),
-                                tv_ArrivalSelection.getText().toString(),true, selectedDepartureStationSchedule,selectedArrivalStationSchedule));
+                        fragmentTransaction.replace(R.id.frame_layout,
+                                new ServiceSelectionFragment(
+                                        tv_DepartureSelection.getText().toString(),
+                                        tv_ArrivalSelection.getText().toString(),true,
+                                        selectedDepartureStationSchedule,selectedArrivalStationSchedule,
+                                        selectedDepartureInfoTrain, selectedArrivalInfoTrain, currentCustomer, numberOfCustomer));
                         fragmentTransaction.commit();
                     } else{
                         Toast.makeText(getContext(),"Please choose seat for departure and arrival journey",Toast.LENGTH_LONG).show();
@@ -110,8 +130,12 @@ public class SeatSelectionFragment extends Fragment implements TrainCarriageAdap
                     if (departureInfo.length>3){
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.frame_layout, new ServiceSelectionFragment(tv_DepartureSelection.getText().toString(),
-                                "",false,selectedDepartureStationSchedule,""));
+                        fragmentTransaction.replace(R.id.frame_layout,
+                                new ServiceSelectionFragment(
+                                        tv_DepartureSelection.getText().toString(),
+                                "", false,
+                                        selectedDepartureStationSchedule,"",
+                                        selectedDepartureInfoTrain, selectedArrivalInfoTrain, currentCustomer, numberOfCustomer));
                         fragmentTransaction.commit();
                     }else{
                         Toast.makeText(getContext(),"Please choose seat for departure",Toast.LENGTH_LONG).show();

@@ -117,7 +117,7 @@ public class TrainBookingAdapter extends RecyclerView.Adapter<TrainBookingAdapte
     }
 
     public static class myViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_departureTime, tv_arrivalTime,tv_departureStation,tv_arrivalStation,tv_trainNumber,tv_seatAvailable;
+        public TextView tv_departureTime, tv_arrivalTime,tv_departureStation,tv_arrivalStation,tv_trainNumber;
         public Button btnChoose;
         public myViewHolder(View view) {
             super(view);
@@ -126,7 +126,6 @@ public class TrainBookingAdapter extends RecyclerView.Adapter<TrainBookingAdapte
             tv_departureStation = view.findViewById(R.id.tv_departureStation);
             tv_arrivalStation = view.findViewById(R.id.tv_arrivalStation);
             tv_trainNumber = view.findViewById(R.id.tv_trainNumber);
-            tv_seatAvailable = view.findViewById(R.id.tv_seatAvailable);
             btnChoose = view.findViewById(R.id.btnChoose);
 
         }

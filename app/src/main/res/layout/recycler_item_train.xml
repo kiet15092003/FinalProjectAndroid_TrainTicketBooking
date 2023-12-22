@@ -102,13 +102,6 @@
                         android:textColor="@color/black"
                         android:textSize="18dp"
                         android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/tv_seatAvailable"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="4"
-                        android:textColor="#AEA400"
-                        android:text="108 seats available"/>
                 </LinearLayout>
                
                 <Button

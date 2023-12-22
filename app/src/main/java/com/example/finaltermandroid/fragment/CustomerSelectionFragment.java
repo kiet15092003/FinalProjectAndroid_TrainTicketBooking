@@ -63,7 +63,7 @@ public class CustomerSelectionFragment extends Fragment {
     private String selectedDepartureInfoTrain,selectedArrivalInfoTrain;
     private boolean isReturn;
     private boolean checkLengthFalse = false;
-    TextView tv_DepartureSelection, tv_ArrivalSelection;
+    TextView tv_DepartureSelection, tv_ArrivalSelection,tv_CustomerCurrent, tv_CustomerTotal;
     TextInputLayout nameInputLayout,phoneInputLayout,addressInputLayout;
     TextInputEditText addressEditText, phoneEditText, nameEditText;
     LinearLayout ll_arrival;
@@ -75,12 +75,21 @@ public class CustomerSelectionFragment extends Fragment {
     private int totalMoneyValue;
     private String discountKey = "";
     private String selectedDepartureStationSchedule,selectedArrivalStationSchedule;
-    public CustomerSelectionFragment(String selectedDepartureInfoTrain, String selectedArrivalInfoTrain, boolean isReturn, String selectedDepartureStationSchedule ,String selectedArrivalStationSchedule){
+    private String backSelectedDepartureInfoTrain, backSelectedArrivalInfoTrain;
+    private int numberOfCustomer;
+    private int currentCustomer;
+    public CustomerSelectionFragment(String selectedDepartureInfoTrain, String selectedArrivalInfoTrain, boolean isReturn, String selectedDepartureStationSchedule ,String selectedArrivalStationSchedule,
+                                     String backSelectedDepartureInfoTrain, String backSelectedArrivalInfoTrain,
+                                     int currentCustomer, int numberOfCustomer){
         this.selectedArrivalInfoTrain = selectedArrivalInfoTrain;
         this.selectedDepartureInfoTrain = selectedDepartureInfoTrain;
         this.isReturn = isReturn;
         this.selectedDepartureStationSchedule = selectedDepartureStationSchedule;
         this.selectedArrivalStationSchedule = selectedArrivalStationSchedule;
+        this.currentCustomer = currentCustomer;
+        this.numberOfCustomer = numberOfCustomer;
+        this.backSelectedDepartureInfoTrain= backSelectedDepartureInfoTrain;
+        this.backSelectedArrivalInfoTrain = backSelectedArrivalInfoTrain;
     }
     @Nullable
     @Override
@@ -99,6 +108,11 @@ public class CustomerSelectionFragment extends Fragment {
         DiscountSpinner = view.findViewById(R.id.DiscountSpinner);
         edtTotalMoney = view.findViewById(R.id.edtTotalMoney);
         btnPayment = view.findViewById(R.id.btnPayment);
+
+        tv_CustomerCurrent = view.findViewById(R.id.tv_CustomerCurrent);
+        tv_CustomerTotal = view.findViewById(R.id.tv_CustomerTotal);
+        tv_CustomerCurrent.setText(String.valueOf(currentCustomer));
+        tv_CustomerTotal.setText(String.valueOf(numberOfCustomer));
 
         edtTotalMoney.setEnabled(false);
         LoadEditTextAndInputLayout(nameInputLayout,nameEditText);
@@ -259,7 +273,10 @@ public class CustomerSelectionFragment extends Fragment {
         }
     }
     public void showPaymentSuccessDialog() {
-        PaymentSuccessDialog paymentSuccessDialog = new PaymentSuccessDialog();
+        PaymentSuccessDialog paymentSuccessDialog = new PaymentSuccessDialog(
+                backSelectedDepartureInfoTrain, backSelectedArrivalInfoTrain,isReturn,
+                selectedDepartureStationSchedule,selectedArrivalStationSchedule,
+                currentCustomer, numberOfCustomer);
         paymentSuccessDialog.show(getChildFragmentManager(), "PaymentSuccessDialogFragment");
     }
     private Map<String, String> extractInformation(String inputString) {

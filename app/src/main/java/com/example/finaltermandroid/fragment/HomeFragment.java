@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -42,10 +43,11 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     Spinner departureSpinner, destinationSpinner;
-    TextView btnChooseDateDeparture, btnChooseDateArrival;
+    TextView btnChooseDateDeparture, btnChooseDateArrival, tv_numberOfCustomer;
     LinearLayout roundTrip;
     SwitchCompat isReturnSwitch;
     Button btnSearchTrain;
+    ImageView btn_subtract,btn_plus;
     private String selectedDepartureStationId;
     private String selectedDestinationStationId;
     @Override
@@ -60,9 +62,26 @@ public class HomeFragment extends Fragment {
         roundTrip = view.findViewById(R.id.roundTrip);
         isReturnSwitch = view.findViewById(R.id.isReturnSwitch);
         btnSearchTrain = view.findViewById(R.id.btnSearchTrain);
+        tv_numberOfCustomer = view.findViewById(R.id.tv_numberOfCustomer);
+        btn_subtract = view.findViewById(R.id.btn_subtract);
+        btn_plus = view.findViewById(R.id.btn_plus);
         roundTrip.setVisibility(View.GONE);
         SetAdapterSpinner(departureSpinner);
         SetAdapterSpinner(destinationSpinner);
+        btn_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_numberOfCustomer.setText(String.valueOf(Integer.parseInt(tv_numberOfCustomer.getText().toString())+1));
+            }
+        });
+        btn_subtract.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Integer.parseInt(tv_numberOfCustomer.getText().toString())>1){
+                    tv_numberOfCustomer.setText(String.valueOf(Integer.parseInt(tv_numberOfCustomer.getText().toString())-1));
+                }
+            }
+        });
         departureSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -190,7 +209,6 @@ public class HomeFragment extends Fragment {
         // Show the DatePickerDialog
         datePickerDialog.show();
     }
-
     private void processData(String data) {
         if (isReturnSwitch.isChecked()){
             DatabaseReference stationScheduleArrivalRefs = FirebaseDatabase.getInstance().getReference().child("stationSchedule");
@@ -209,12 +227,14 @@ public class HomeFragment extends Fragment {
                                                 && snapshot.child("departureDate").getValue(String.class).equals(btnChooseDateArrival.getText().toString())){
                                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                            fragmentTransaction.replace(R.id.frame_layout, new TrainSelectionFragment(data, snapshot.getKey(), true));
+                                            fragmentTransaction.replace(R.id.frame_layout, new TrainSelectionFragment(data, snapshot.getKey(), true,
+                                                    Integer.parseInt(tv_numberOfCustomer.getText().toString()),1));
                                             fragmentTransaction.commit();
                                         } else {
                                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                            fragmentTransaction.replace(R.id.frame_layout, new TrainSelectionFragment(data, "", true));
+                                            fragmentTransaction.replace(R.id.frame_layout, new TrainSelectionFragment(data, "", true,
+                                                    Integer.parseInt(tv_numberOfCustomer.getText().toString()),1));
                                             fragmentTransaction.commit();
                                         }
                                     }
@@ -226,7 +246,8 @@ public class HomeFragment extends Fragment {
                     } else{
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.frame_layout, new TrainSelectionFragment(data, "", true));
+                        fragmentTransaction.replace(R.id.frame_layout, new TrainSelectionFragment(data, "", true,
+                                Integer.parseInt(tv_numberOfCustomer.getText().toString()),1));
                         fragmentTransaction.commit();
                     }
                 }
@@ -236,7 +257,7 @@ public class HomeFragment extends Fragment {
         } else{
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.frame_layout, new TrainSelectionFragment(data, false));
+            fragmentTransaction.replace(R.id.frame_layout, new TrainSelectionFragment(data, false,Integer.parseInt(tv_numberOfCustomer.getText().toString()),1));
             fragmentTransaction.commit();
         }
     }

@@ -35,19 +35,27 @@ import java.util.List;
 public class ServiceSelectionFragment extends Fragment implements TrainServiceAdapter.OnButtonClickListener{
     RecyclerView rv_service;
     LinearLayout ll_arrival;
-    TextView tv_DepartureSelection,tv_ArrivalSelection;
+    TextView tv_DepartureSelection,tv_ArrivalSelection,tv_CustomerCurrent, tv_CustomerTotal;
     Button btn_chooseArrival, btn_chooseDeparture, btnCustomer;
     private boolean isReturn;
     private boolean isChoseArrival = false;
     private String selectedDepartureInfoTrain,selectedArrivalInfoTrain;
     private String selectedDepartureStationSchedule,selectedArrivalStationSchedule;
+    private String backSelectedDepartureInfoTrain, backSelectedArrivalInfoTrain;
+    private int numberOfCustomer;
+    private int currentCustomer;
     public ServiceSelectionFragment(String selectedDepartureInfoTrain, String selectedArrivalInfoTrain, boolean isReturn, String selectedDepartureStationSchedule,
-                                    String selectedArrivalStationSchedule){
+                                    String selectedArrivalStationSchedule,
+                                    String backSelectedDepartureInfoTrain, String backSelectedArrivalInfoTrain, int currentCustomer, int numberOfCustomer){
         this.selectedDepartureInfoTrain =selectedDepartureInfoTrain;
         this.selectedArrivalInfoTrain = selectedArrivalInfoTrain;
         this.isReturn = isReturn;
         this.selectedDepartureStationSchedule = selectedDepartureStationSchedule;
         this.selectedArrivalStationSchedule = selectedArrivalStationSchedule;
+        this.currentCustomer = currentCustomer;
+        this.numberOfCustomer = numberOfCustomer;
+        this.backSelectedDepartureInfoTrain= backSelectedDepartureInfoTrain;
+        this.backSelectedArrivalInfoTrain = backSelectedArrivalInfoTrain;
     }
     @Nullable
     @Override
@@ -61,6 +69,12 @@ public class ServiceSelectionFragment extends Fragment implements TrainServiceAd
         btn_chooseDeparture = view.findViewById(R.id.btn_chooseDeparture);
         btnCustomer = view.findViewById(R.id.btnCustomer);
         LoadRecyclerViewService(rv_service);
+
+        tv_CustomerCurrent = view.findViewById(R.id.tv_CustomerCurrent);
+        tv_CustomerTotal = view.findViewById(R.id.tv_CustomerTotal);
+        tv_CustomerCurrent.setText(String.valueOf(currentCustomer));
+        tv_CustomerTotal.setText(String.valueOf(numberOfCustomer));
+
         if (isReturn){
             ll_arrival.setVisibility(View.VISIBLE);
             String[] selectedArrivalInfoTrainArray = selectedArrivalInfoTrain.split(" - ");
@@ -121,13 +135,16 @@ public class ServiceSelectionFragment extends Fragment implements TrainServiceAd
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.frame_layout, new CustomerSelectionFragment(tv_DepartureSelection.getText().toString(),
-                            tv_ArrivalSelection.getText().toString(),true,selectedDepartureStationSchedule,selectedArrivalStationSchedule));
+                            tv_ArrivalSelection.getText().toString(),true,selectedDepartureStationSchedule,selectedArrivalStationSchedule,
+                            backSelectedDepartureInfoTrain, backSelectedArrivalInfoTrain, currentCustomer, numberOfCustomer));
                     fragmentTransaction.commit();
                 } else {
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.frame_layout, new CustomerSelectionFragment(tv_DepartureSelection.getText().toString(),
-                            "",false,selectedDepartureStationSchedule,""));
+                            "",false,selectedDepartureStationSchedule,"",
+                            backSelectedDepartureInfoTrain, backSelectedArrivalInfoTrain, currentCustomer, numberOfCustomer
+                            ));
                     fragmentTransaction.commit();
                 }
             }

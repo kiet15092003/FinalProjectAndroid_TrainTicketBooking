@@ -23,17 +23,19 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_payment_success" />
     <TextView
+        android:id="@+id/tv_TextView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Your ticket is booked and paid successfully"
         />
     <TextView
+        android:id="@+id/tv_TextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
-        android:text="Please touch OK to back to home"
+        android:text="Please touch OK to book seat for next passenger"
         />
     <LinearLayout
         android:layout_width="match_parent"

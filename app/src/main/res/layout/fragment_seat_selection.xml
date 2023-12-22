@@ -6,6 +6,38 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragment.SeatSelectionFragment">
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choosing seat number of passenger "
+            />
+        <TextView
+            android:id="@+id/tv_CustomerCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textColor="@color/orange"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" / "
+            />
+        <TextView
+            android:id="@+id/tv_CustomerTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,7 +90,7 @@
     <LinearLayout
         android:id="@+id/ChooseSeat"
         android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_height="350dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
@@ -130,7 +162,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Selected" />
+                    android:text="Sold" />
             </LinearLayout>
         </LinearLayout>
             <LinearLayout
@@ -142,7 +174,7 @@
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/gridView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:numColumns="4"
                 android:verticalSpacing="10dp"
                 android:horizontalSpacing="20dp"

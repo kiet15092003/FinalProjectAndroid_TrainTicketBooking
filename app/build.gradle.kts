@@ -50,4 +50,8 @@ dependencies {
     implementation ("com.github.dhaval2404:imagepicker:2.1")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("com.firebaseui:firebase-ui-storage:7.2.0")
+    implementation ("com.github.dhaval2404:imagepicker:2.1")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("com.firebaseui:firebase-ui-storage:7.2.0")
+    implementation("org.threeten:threetenbp:1.5.1")
 }

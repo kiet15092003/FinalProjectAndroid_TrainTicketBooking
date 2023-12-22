@@ -46,4 +46,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:21.0.1")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.google.firebase:firebase-database:20.3.0")
+    implementation ("com.github.dhaval2404:imagepicker:2.1")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("com.firebaseui:firebase-ui-storage:7.2.0")
 }

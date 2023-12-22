@@ -130,7 +130,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Selected" />
+                    android:text="Sold" />
             </LinearLayout>
         </LinearLayout>
             <LinearLayout

@@ -27,7 +27,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="@string/tt_login"
                 android:id="@+id/loginText"
                 android:textSize="36sp"
                 android:textAlignment="center"
@@ -48,7 +48,7 @@
                     android:id="@+id/LoginNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter your email" />
+                    android:hint="@string/tv_gmail" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/LoginPasswordInputLayout"
@@ -64,7 +64,7 @@
                     android:id="@+id/LoginPasswordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter your password" />
+                    android:hint="@string/tv_pass" />
             </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -73,13 +73,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Don't have any account? "
+                    android:text="@string/tt_register"
                     />
                 <TextView
                     android:id="@+id/tvRegister"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Register"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/tv_register"
                     android:textColor="@color/orange"
                     />
             </LinearLayout>
@@ -94,7 +95,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:strokeWidth="2dp"
                 app:cornerRadius="20dp"
-                android:text="Login"
+                android:text="@string/btn_login"
                 android:textColor="@color/white"
                 app:strokeColor="@color/orangeLess"
                 />
@@ -105,7 +106,7 @@
                 android:id="@+id/tvForgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Forgot Password?"
+                android:text="@string/forgotpass"
                 android:textSize="15dp"
                 android:textColor="@color/black"
                 />

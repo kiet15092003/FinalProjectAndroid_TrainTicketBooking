@@ -111,7 +111,7 @@
                     android:layout_weight="1.5"
                     android:layout_gravity="center"
                     android:background="@drawable/button_border"
-                    android:text="Choose"
+                    android:text="@string/btnChoose"
                     android:textColor="@color/orange"
                     android:paddingStart="16dp"
                     android:drawableLeft="@drawable/ic_train_24"

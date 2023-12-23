@@ -23,14 +23,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Departure:"
+                android:text="@string/Departure"
                 />
             <TextView
                 android:id="@+id/tv_DepartureStation"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Not select"
+                android:text="@string/Notselect"
                 android:background="@drawable/textview_border"
                 android:padding="10dp" />
             <com.google.android.material.button.MaterialButton
@@ -41,7 +41,7 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:strokeWidth="2dp"
                 app:cornerRadius="10dp"
-                android:text="view"
+                android:text="@string/View"
                 android:textColor="@color/black"
                 app:strokeColor="@color/orange"
                 android:layout_toRightOf="@+id/iv_imgSrc"
@@ -55,14 +55,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Destination:"
+                android:text="@string/Destination"
                 />
             <TextView
                 android:id="@+id/tv_DestinationStation"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Not select"
+                android:text="@string/Notselect"
                 android:background="@drawable/textview_border"
                 android:padding="10dp" />
             <com.google.android.material.button.MaterialButton
@@ -73,7 +73,7 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:strokeWidth="2dp"
                 app:cornerRadius="10dp"
-                android:text="view"
+                android:text="@string/View"
                 android:textColor="@color/black"
                 app:strokeColor="@color/orange"
                 android:layout_toRightOf="@+id/iv_imgSrc"

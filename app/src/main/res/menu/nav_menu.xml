@@ -8,21 +8,21 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_nav_home"
-            android:title="Home"/>
+            android:title="@string/Home"/>
 
         <item
             android:id="@+id/nav_ticket"
             android:icon="@drawable/ic_nav_ticket"
-            android:title="Ticket"/>
+            android:title="@string/Ticket"/>
 
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_nav_profile"
-            android:title="Profile"/>
+            android:title="@string/Profile"/>
         <item
             android:id="@+id/nav_point"
             android:icon="@drawable/ic_point_discount"
-            android:title="Point and discount"/>
+            android:title="@string/Pointanddiscount"/>
     </group>
     <item
         android:title="">
@@ -30,19 +30,19 @@
             <item
                 android:id="@+id/nav_support"
                 android:icon="@drawable/ic_support"
-                android:title="Help"/>
+                android:title="@string/Help"/>
             <item
                 android:id="@+id/nav_notification"
                 android:icon="@drawable/ic_notifications"
-                android:title="Notification"/>
+                android:title="@string/Notification"/>
             <item
                 android:id="@+id/nav_setting"
                 android:icon="@drawable/ic_setting"
-                android:title="Setting"/>
+                android:title="@string/Setting"/>
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_nav_logout"
-                android:title="Logout"/>
+                android:title="@string/Logout"/>
         </menu>
     </item>
 </menu>

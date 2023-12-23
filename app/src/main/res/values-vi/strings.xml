@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Trang chủ</string>
+    <string name="open_nav">Mở ngăn điều hướng</string>
+    <string name="close_nav">Đóng ngăn điều hướng</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Xin chào</string>
+
+    <!--Login Activity-->
+    <string name="tt_login">Đăng nhập</string>
+    <string name="tv_gmail">Nhập email</string>
+    <string name="tv_pass">Nhập mật khẩu</string>
+    <string name="tt_register">Bạn chưa có tài khoản?</string>
+    <string name="tv_register">Đăng ký</string>
+    <string name="btn_login">Đăng nhập</string>
+    <string name="forgotpass">Quên mật khẩu?</string>
+
+    <!--Setting Fragment-->
+    <string name="tt_signup">Đăng ký</string>
+    <string name="tv_name">Nhập tên</string>
+    <string name="tv_phone">Nhập số điện thoại</string>
+    <string name="tv_pass_confirm">Nhập lại mật khẩu</string>
+    <string name="tv_1">"Tôi đồng ý với  "</string>
+    <string name="TermofService">Điều khoản dịch vụ</string>
+    <string name="tv_2">" và "</string>
+    <string name="PrivacyPolicy">Chính sách quyền riêng tư</string>
+    <string name="tt_Alreadyamember">"Bạn đã có tài khoản?  "</string>
+
+    <!--Home Fragment-->
+    <string name="ROUNDTRIP">KHỨ HỒI</string>
+    <string name="ONEWAY">MỘT CHIỀU</string>
+    <string name="FROM">TỪ</string>
+    <string name="TO">ĐẾN</string>
+    <string name="DEPARTUREDAY">NGÀY KHỞI HÀNH</string>
+    <string name="ARRIVALDAY">NGÀY VỀ</string>
+    <string name="Numberofpassenger">"Số hành khách: "</string>
+    <string name="SearchTrain">Tìm chuyến tàu</string>
+
+    <!--Help Fragment-->
+    <string name="FrequentlyAskedQuestions">Câu hỏi thường gặp</string>
+    <string name="Callhotline">Gọi hottline để được hỗ trợ nhanh chóng</string>
+    <string name="q1">1. Câu hỏi: Tôi có thể đặt vé tàu bằng cách nào?</string>
+    <string name="a1">Trả lời: Để đặt vé tàu, bạn có thể sử dụng ứng dụng của chúng tôi và làm theo các bước đơn giản trên giao diện. Chọn điểm khởi hành và điểm đến, nhập thông tin hành khách và chọn chỗ ngồi ưa thích của bạn trên bản đồ ga tàu.</string>
+    <string name="q2">2. Câu hỏi: Tôi quên mật khẩu, làm cách nào để lấy lại?</string>
+    <string name="a2">Trả lời: Để khôi phục mật khẩu, bạn có thể sử dụng tùy chọn \'Quên mật khẩu\' trên màn hình đăng nhập. Chúng tôi sẽ gửi hướng dẫn khôi phục đến email bạn đã đăng ký.</string>
+    <string name="q3">3. Câu hỏi: Làm cách nào để thanh toán tiền vé đã đặt?</string>
+    <string name="a3">Trả lời: Bạn có thể thanh toán tiền vé đã đặt bằng các phương thức thanh toán an toàn và thuận tiện như thẻ tín dụng, thẻ ghi nợ hoặc ví điện tử.</string>
+
+    <!--Profile Fragment-->
+    <string name="tt_phone">Số điện thoại</string>
+    <string name="tt_pass">Mật khẩu</string>
+    <string name="Logout">Đăng xuất</string>
+
+    <!--nav_menu.xml-->
+    <string name="Home">Trang chủ</string>
+    <string name="Ticket">Vé</string>
+    <string name="Profile">Hồ sơ</string>
+    <string name="Pointanddiscount">Điểm thưởng và Voucher</string>
+    <string name="Help">Hỗ trợ</string>
+    <string name="Notification">Thông báo</string>
+    <string name="Setting">Cài đặt</string>
+
+    <!--fragment_train_selection-->
+    <string name="DepartureSelection">"Lựa chọn: "</string>
+    <string name="Notselect">Chưa chọn</string>
+    <string name="ArrivalSelection">"Chọn điểm đến: "</string>
+    <string name="CHOOSESEAT">CHỌN GHẾ</string>
+
+    <!--fragment_seat_selection-->
+    <string name="Choosingpassenger">Chọn số ghế của hành khách</string>
+    <string name="Departure">"Khởi hành: "</string>
+    <string name="Arrival">"Đến: "</string>
+    <string name="Available">Ghế trống</string>
+    <string name="Sold">Hết chỗ</string>
+    <string name="CHOOSESERVICE">Chọn dịch vụ</string>
+
+    <!--fragment_service_selection-->
+    <string name="EDITCUSTOMER">Sửa thông tin khách hàng</string>
+
+    <!--fragment_customer_selection-->
+    <string name="total">"Tổng: "</string>
+    <string name="Enteryouraddress">Nhập địa chỉ</string>
+    <string name="Choosepaymentoption">Chọn phương thức thanh toán</string>
+    <string name="Choosediscountvoucher">Chọn Voucher</string>
+    <string name="CONFIRMPAYMENT">XÁC NHẬN THANH TOÁN</string>
+
+    <!--fragment_station_map-->
+    <string name="Destination">"Điểm dến: "</string>
+    <string name="View">XEM</string>
+
+    <!--fragment_point-->
+    <string name="Yourtotalpayment">Tổng số tiền đã thanh toán</string>
+    <string name="dstotal">Tổng số tiền thanh toán là số tiền phải trả cho chỗ ngồi trên tàu nếu không nhận được khuyến mãi</string>
+    <string name="Yourpoints">Điểm của bạn</string>
+    <string name="dsPoint">Điểm được quy đổi từ tổng số tiền thanh toán theo công thức cho tất cả các tài khoản hệ thống</string>
+    <string name="changePoint">Đổi điểm để lấy mã giảm giá</string>
+
+    <!--fragment_eticket-->
+    <string name="Departure_i">ĐIỂM KHỞI HÀNH</string>
+    <string name="DESTINATION_i">ĐIỂM ĐẾN</string>
+    <string name="Departure_time">"Giờ khởi hành: "</string>
+    <string name="DestinationTime">"Giờ đến: "</string>
+    <string name="train">"Tàu: "</string>
+    <string name="Passenger">"Hành khách: "</string>
+    <string name="Seatnumber">"Mã ghế: "</string>
+    <string name="Servicename">"Tên dịch vụ: "</string>
+    <string name="Discount">"Mã giảm giá: "</string>
+    <string name="TotalPayment">"Tổng tiền: "</string>
+    <string name="Ticketcode">"Mã vé: "</string>
+
+    <!--diaglog_payment_success-->
+    <string name="PaymentSuccessful">Thanh Toán Thành Công</string>
+    <string name="dsPayment">Vé của bạn đã được đặt và thanh toán thành công</string>
+    <string name="ds2Payment">Vui lòng nhấn OK để đặt chỗ cho hành khách tiếp theo</string>
+
+    <!--diaglog_edit_password-->
+    <string name="ChangePassword">Đổi mật khẩu</string>
+    <string name="Oldpassword">Mật khẩu cũ</string>
+    <string name="Newpassword">Mật khẩu mới</string>
+    <string name="CofirmPassword">Xác nhận mật khẩu mới</string>
+
+    <!--diaglog_forgot_password-->
+    <string name="Forgotpassword">Quên mật khẩu</string>
+
+    <!--diaglog_edit_phone-->
+    <string name="ChangePhoneNumber">Đổi số điện thoại</string>
+
+
+    <!--activity_forgotten_password-->
+    <string name="Forgottenpassword">Đã quên mật khẩu</string>
+    <string name="dsEmailPass">Please enter your email then we will help you to recover your account</string>
+    <string name="btn_Submit">Gửi</string>
+    <string name="tv_remember">Tôi đã nhớ mật khẩu của mình </string>
+
+    <!--recycler_item_train-->
+    <string name="btnChoose">Chọn</string>
+
+    <!--recycler_item_train-->
+    <string name="BOOK">ĐẶT</string>
+
+    <!--recycler_item_service-->
+    <string name="ShareTrain">Chia sẻ</string>
+    <string name="STATIONMAP">Lộ trình</string>
+    <string name="ViewEticket">Xem vé</string>
+
+    <!--Setting Fragment-->
+    <string name="tt_languages">Chọn ngôn ngữ của bạn</string>
+
+</resources>

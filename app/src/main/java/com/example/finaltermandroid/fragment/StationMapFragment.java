@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -50,7 +49,6 @@ public class StationMapFragment extends Fragment {
         DatabaseReference ticketRefs = FirebaseDatabase.getInstance().getReference().child("ticket");
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        Toast.makeText(getContext(),String.valueOf(ticketPosition),Toast.LENGTH_LONG).show();
         ticketRefs.orderByChild("accountEmail").equalTo(currentUser.getEmail()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

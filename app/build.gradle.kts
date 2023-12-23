@@ -55,4 +55,5 @@ dependencies {
     implementation ("com.firebaseui:firebase-ui-storage:7.2.0")
     implementation("org.threeten:threetenbp:1.5.1")
     implementation("com.google.android.gms:play-services-maps:17.0.1")
+    implementation("com.paypal.sdk:paypal-android-sdk:2.16.0")
 }

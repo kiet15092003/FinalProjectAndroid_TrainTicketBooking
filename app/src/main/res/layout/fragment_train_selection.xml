@@ -18,9 +18,19 @@
         app:showText="true"
         android:textOn="ARRIVAL"
         android:textOff="DEPARTURE"/>
+
+    <TextView
+        android:layout_marginLeft="16dp"
+        android:id="@+id/tv_numberTotalTrain"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="There weren't any trains to be found"
+        />
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="430dp"
+        android:layout_height="390dp"
         android:layout_marginTop="10dp"
         >
         <LinearLayout

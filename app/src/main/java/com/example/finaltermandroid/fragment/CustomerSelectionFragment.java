@@ -1,13 +1,17 @@
 package com.example.finaltermandroid.fragment;
 
+import org.json.JSONException;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.format.DateTimeFormatter;
 import org.threeten.bp.temporal.ChronoUnit;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +29,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.finaltermandroid.R;
 import com.example.finaltermandroid.adapter.SpinnerDiscountAdapter;
-import com.example.finaltermandroid.adapter.SpinnerPaymentMethodsAdapter;
 import com.example.finaltermandroid.adapter.TrainStationAdapter;
 import com.example.finaltermandroid.dialog.EditPhoneDialog;
 import com.example.finaltermandroid.dialog.PaymentSuccessDialog;
@@ -45,7 +48,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,7 +76,7 @@ public class CustomerSelectionFragment extends Fragment {
     TextInputLayout nameInputLayout,phoneInputLayout,addressInputLayout;
     TextInputEditText addressEditText, phoneEditText, nameEditText;
     LinearLayout ll_arrival;
-    Spinner PaymentMethodsSpinner,DiscountSpinner;
+    Spinner DiscountSpinner;
     Button btnPayment;
     EditText edtTotalMoney;
     private double selectedDiscount = -1;
@@ -78,9 +87,10 @@ public class CustomerSelectionFragment extends Fragment {
     private String backSelectedDepartureInfoTrain, backSelectedArrivalInfoTrain;
     private int numberOfCustomer;
     private int currentCustomer;
+    private int totalMoney;
     public CustomerSelectionFragment(String selectedDepartureInfoTrain, String selectedArrivalInfoTrain, boolean isReturn, String selectedDepartureStationSchedule ,String selectedArrivalStationSchedule,
                                      String backSelectedDepartureInfoTrain, String backSelectedArrivalInfoTrain,
-                                     int currentCustomer, int numberOfCustomer){
+                                     int currentCustomer, int numberOfCustomer, int totalMoney){
         this.selectedArrivalInfoTrain = selectedArrivalInfoTrain;
         this.selectedDepartureInfoTrain = selectedDepartureInfoTrain;
         this.isReturn = isReturn;
@@ -90,6 +100,7 @@ public class CustomerSelectionFragment extends Fragment {
         this.numberOfCustomer = numberOfCustomer;
         this.backSelectedDepartureInfoTrain= backSelectedDepartureInfoTrain;
         this.backSelectedArrivalInfoTrain = backSelectedArrivalInfoTrain;
+        this.totalMoney = totalMoney;
     }
     @Nullable
     @Override
@@ -104,7 +115,6 @@ public class CustomerSelectionFragment extends Fragment {
         phoneEditText = view.findViewById(R.id.phoneEditText);
         nameEditText = view.findViewById(R.id.nameEditText);
         ll_arrival = view.findViewById(R.id.ll_arrival);
-        PaymentMethodsSpinner = view.findViewById(R.id.PaymentMethodsSpinner);
         DiscountSpinner = view.findViewById(R.id.DiscountSpinner);
         edtTotalMoney = view.findViewById(R.id.edtTotalMoney);
         btnPayment = view.findViewById(R.id.btnPayment);
@@ -138,7 +148,6 @@ public class CustomerSelectionFragment extends Fragment {
             edtTotalMoney.setText(String.valueOf(totalMoneyValue) + "k");
         }
         SetAdapterDiscountSpinner(DiscountSpinner);
-        SetAdapterPaymentMethodsSpinner(PaymentMethodsSpinner);
         DiscountSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -152,18 +161,6 @@ public class CustomerSelectionFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        PaymentMethodsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String paymentOptionValue = (String) parent.getItemAtPosition(position);
-                paymentOption = paymentOptionValue;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         btnPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,8 +172,6 @@ public class CustomerSelectionFragment extends Fragment {
                 } else {
                     if (checkLengthFalse){
                         Toast.makeText(getContext(),"Please check the length of your input for customer information",Toast.LENGTH_LONG).show();
-                    } else if (paymentOption.equals("")){
-                        Toast.makeText(getContext(),"Please choose the payment option",Toast.LENGTH_LONG).show();
                     } else {
                         //Show dialog and save to firebase
                         showPaymentSuccessDialog();
@@ -257,11 +252,6 @@ public class CustomerSelectionFragment extends Fragment {
             });
         }
     }
-    public void SetAdapterPaymentMethodsSpinner(Spinner spinner){
-        List<String> paymentOptions = Arrays.asList("Pay by PayPal", "Pay by International debit card", "Pay upon arrival at the station");
-        SpinnerPaymentMethodsAdapter spinnerPaymentMethodsAdapter = new SpinnerPaymentMethodsAdapter(getContext(), paymentOptions);
-        spinner.setAdapter(spinnerPaymentMethodsAdapter);
-    }
     private static double extractNumericValue(String input, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
@@ -273,10 +263,12 @@ public class CustomerSelectionFragment extends Fragment {
         }
     }
     public void showPaymentSuccessDialog() {
+        int totalMoneyNow = Integer.parseInt(edtTotalMoney.getText().toString().substring(0, edtTotalMoney.getText().toString().length() - 1));
+        int totalMoneyBack = this.totalMoney;
         PaymentSuccessDialog paymentSuccessDialog = new PaymentSuccessDialog(
                 backSelectedDepartureInfoTrain, backSelectedArrivalInfoTrain,isReturn,
                 selectedDepartureStationSchedule,selectedArrivalStationSchedule,
-                currentCustomer, numberOfCustomer);
+                currentCustomer, numberOfCustomer, totalMoneyBack,totalMoneyNow);
         paymentSuccessDialog.show(getChildFragmentManager(), "PaymentSuccessDialogFragment");
     }
     private Map<String, String> extractInformation(String inputString) {

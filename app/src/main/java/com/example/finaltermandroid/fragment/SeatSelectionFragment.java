@@ -45,12 +45,13 @@ public class SeatSelectionFragment extends Fragment implements TrainCarriageAdap
     private boolean isChoseArrival = false;
     private int numberOfCustomer;
     private int currentCustomer;
+    private int totalMoney;
     public SeatSelectionFragment(String selectedDepartureInfoTrain,
                                  String selectedArrivalInfoTrain,
                                  boolean isReturn,
                                  String selectedDepartureStationSchedule,
-                                 String selectedArrivalStationSchedule
-        , int  currentCustomer, int numberOfCustomer){
+                                 String selectedArrivalStationSchedule,
+        int  currentCustomer, int numberOfCustomer, int totalMoney){
         this.selectedArrivalInfoTrain = selectedArrivalInfoTrain;
         this.selectedDepartureInfoTrain = selectedDepartureInfoTrain;
         this.isReturn = isReturn;
@@ -58,6 +59,7 @@ public class SeatSelectionFragment extends Fragment implements TrainCarriageAdap
         this.selectedArrivalStationSchedule = selectedArrivalStationSchedule;
         this.numberOfCustomer = numberOfCustomer;
         this.currentCustomer = currentCustomer;
+        this.totalMoney = totalMoney;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -120,7 +122,7 @@ public class SeatSelectionFragment extends Fragment implements TrainCarriageAdap
                                         tv_DepartureSelection.getText().toString(),
                                         tv_ArrivalSelection.getText().toString(),true,
                                         selectedDepartureStationSchedule,selectedArrivalStationSchedule,
-                                        selectedDepartureInfoTrain, selectedArrivalInfoTrain, currentCustomer, numberOfCustomer));
+                                        selectedDepartureInfoTrain, selectedArrivalInfoTrain, currentCustomer, numberOfCustomer,totalMoney));
                         fragmentTransaction.commit();
                     } else{
                         Toast.makeText(getContext(),"Please choose seat for departure and arrival journey",Toast.LENGTH_LONG).show();
@@ -135,7 +137,7 @@ public class SeatSelectionFragment extends Fragment implements TrainCarriageAdap
                                         tv_DepartureSelection.getText().toString(),
                                 "", false,
                                         selectedDepartureStationSchedule,"",
-                                        selectedDepartureInfoTrain, selectedArrivalInfoTrain, currentCustomer, numberOfCustomer));
+                                        selectedDepartureInfoTrain, selectedArrivalInfoTrain, currentCustomer, numberOfCustomer, totalMoney));
                         fragmentTransaction.commit();
                     }else{
                         Toast.makeText(getContext(),"Please choose seat for departure",Toast.LENGTH_LONG).show();

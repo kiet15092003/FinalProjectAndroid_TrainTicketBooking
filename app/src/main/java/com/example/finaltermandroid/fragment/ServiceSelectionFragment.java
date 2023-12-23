@@ -44,9 +44,10 @@ public class ServiceSelectionFragment extends Fragment implements TrainServiceAd
     private String backSelectedDepartureInfoTrain, backSelectedArrivalInfoTrain;
     private int numberOfCustomer;
     private int currentCustomer;
+    private int totalMoney;
     public ServiceSelectionFragment(String selectedDepartureInfoTrain, String selectedArrivalInfoTrain, boolean isReturn, String selectedDepartureStationSchedule,
                                     String selectedArrivalStationSchedule,
-                                    String backSelectedDepartureInfoTrain, String backSelectedArrivalInfoTrain, int currentCustomer, int numberOfCustomer){
+                                    String backSelectedDepartureInfoTrain, String backSelectedArrivalInfoTrain, int currentCustomer, int numberOfCustomer, int totalMoney){
         this.selectedDepartureInfoTrain =selectedDepartureInfoTrain;
         this.selectedArrivalInfoTrain = selectedArrivalInfoTrain;
         this.isReturn = isReturn;
@@ -56,6 +57,7 @@ public class ServiceSelectionFragment extends Fragment implements TrainServiceAd
         this.numberOfCustomer = numberOfCustomer;
         this.backSelectedDepartureInfoTrain= backSelectedDepartureInfoTrain;
         this.backSelectedArrivalInfoTrain = backSelectedArrivalInfoTrain;
+        this.totalMoney = totalMoney;
     }
     @Nullable
     @Override
@@ -136,14 +138,14 @@ public class ServiceSelectionFragment extends Fragment implements TrainServiceAd
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.frame_layout, new CustomerSelectionFragment(tv_DepartureSelection.getText().toString(),
                             tv_ArrivalSelection.getText().toString(),true,selectedDepartureStationSchedule,selectedArrivalStationSchedule,
-                            backSelectedDepartureInfoTrain, backSelectedArrivalInfoTrain, currentCustomer, numberOfCustomer));
+                            backSelectedDepartureInfoTrain, backSelectedArrivalInfoTrain, currentCustomer, numberOfCustomer, totalMoney));
                     fragmentTransaction.commit();
                 } else {
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.frame_layout, new CustomerSelectionFragment(tv_DepartureSelection.getText().toString(),
                             "",false,selectedDepartureStationSchedule,"",
-                            backSelectedDepartureInfoTrain, backSelectedArrivalInfoTrain, currentCustomer, numberOfCustomer
+                            backSelectedDepartureInfoTrain, backSelectedArrivalInfoTrain, currentCustomer, numberOfCustomer,totalMoney
                             ));
                     fragmentTransaction.commit();
                 }

@@ -36,9 +36,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.format.DateTimeFormatter;
+import org.threeten.bp.temporal.ChronoUnit;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -50,6 +56,7 @@ public class HomeFragment extends Fragment {
     ImageView btn_subtract,btn_plus;
     private String selectedDepartureStationId;
     private String selectedDestinationStationId;
+    private boolean isReturn = false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,6 +75,11 @@ public class HomeFragment extends Fragment {
         roundTrip.setVisibility(View.GONE);
         SetAdapterSpinner(departureSpinner);
         SetAdapterSpinner(destinationSpinner);
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = dateFormat.format(currentDate);
+        btnChooseDateDeparture.setText(formattedDate);
+        btnChooseDateArrival.setText(formattedDate);
         btn_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +126,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    isReturn = true;
                     //User choose return
                     roundTrip.setVisibility(View.VISIBLE);
                     btnChooseDateArrival.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +136,7 @@ public class HomeFragment extends Fragment {
                         }
                     });
                 } else {
+                    isReturn = false;
                     roundTrip.setVisibility(View.GONE);
                 }
             }
@@ -130,37 +144,52 @@ public class HomeFragment extends Fragment {
         btnSearchTrain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference stationScheduleRefs = FirebaseDatabase.getInstance().getReference().child("stationSchedule");
-                stationScheduleRefs.orderByChild("departureStation").equalTo(selectedDepartureStationId).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()){
-                            for (DataSnapshot stationScheduleSnapshot : snapshot.getChildren()) {
-                                String stationScheduleId = stationScheduleSnapshot.getKey();
-                                DatabaseReference stationScheduleRef = FirebaseDatabase.getInstance().getReference().child("stationSchedule").child(stationScheduleId);
-                                stationScheduleRef.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if (snapshot.exists()){
-                                            if (snapshot.child("destinationStation").getValue(String.class).equals(selectedDestinationStationId)
-                                                    && snapshot.child("departureDate").getValue(String.class).equals(btnChooseDateDeparture.getText().toString())){
-                                                processData(snapshot.getKey());
-                                            } else{
-                                                processData("");
+                LocalDate departureDate = LocalDate.parse(btnChooseDateDeparture.getText().toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                LocalDate currentDate = LocalDate.now();
+                long daysDifference1 = ChronoUnit.DAYS.between(currentDate, departureDate);
+                long daysDifference2 = 10000;
+                long daysDifference3 = 10000;
+                if (isReturn){
+                    LocalDate arrivalDate = LocalDate.parse(btnChooseDateArrival.getText().toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    daysDifference2 = ChronoUnit.DAYS.between(currentDate, arrivalDate);
+                    daysDifference3 = ChronoUnit.DAYS.between(departureDate,arrivalDate);
+                }
+                if (daysDifference1<0 || daysDifference2<0 || daysDifference3<0){
+                    //Toast.makeText(getContext(),String.valueOf(daysDifference2),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Please choose your day again",Toast.LENGTH_LONG).show();
+                } else {
+                    DatabaseReference stationScheduleRefs = FirebaseDatabase.getInstance().getReference().child("stationSchedule");
+                    stationScheduleRefs.orderByChild("departureStation").equalTo(selectedDepartureStationId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()){
+                                for (DataSnapshot stationScheduleSnapshot : snapshot.getChildren()) {
+                                    String stationScheduleId = stationScheduleSnapshot.getKey();
+                                    DatabaseReference stationScheduleRef = FirebaseDatabase.getInstance().getReference().child("stationSchedule").child(stationScheduleId);
+                                    stationScheduleRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (snapshot.exists()){
+                                                if (snapshot.child("destinationStation").getValue(String.class).equals(selectedDestinationStationId)
+                                                        && snapshot.child("departureDate").getValue(String.class).equals(btnChooseDateDeparture.getText().toString())){
+                                                    processData(snapshot.getKey());
+                                                } else{
+                                                    processData("");
+                                                }
                                             }
                                         }
-                                    }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {}
-                                });
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {}
+                                    });
+                                }
+                            } else {
+                                processData("");
                             }
-                        } else {
-                            processData("");
                         }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
+                    });
+                }
             }
         });
         return view;

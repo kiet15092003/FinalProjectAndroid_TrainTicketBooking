@@ -1,6 +1,7 @@
 package com.example.finaltermandroid.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,6 @@ import java.util.List;
 public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.myViewHolder>{
     private List<Ticket> ticketList;
     private Context context;
-
     public TicketAdapter(List<Ticket> ticketList, Context context) {
         this.ticketList = ticketList;
         this.context = context;
@@ -182,6 +182,23 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.myViewHold
             public void onClick(View v) {
                 if (listener != null) {
                     listenerViewMap.OnButtonViewMapClick(positionTicket);
+                }
+            }
+        });
+        holder.btn_shareTrain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                String textShare = "I have a journey from " + holder.tv_departureStation.getText().toString() + " in "
+                        + holder.tv_departureDate.getText().toString() + " at " + holder.tv_departureTime.getText().toString()
+                        + " to " + holder.tv_destinationStation.getText().toString() + " in "
+                        + holder.tv_destinationDate.getText().toString() + " at " + holder.tv_destinationTime.getText().toString()
+                        + ". I will go on train number " + holder.tv_trainNumber.getText().toString() + " and enjoy the journey.";
+                intent.putExtra(Intent.EXTRA_TEXT, textShare);
+                intent.setType("text/plain");
+                if (intent.resolveActivity(context.getPackageManager())!=null){
+                    context.startActivity(intent);
                 }
             }
         });

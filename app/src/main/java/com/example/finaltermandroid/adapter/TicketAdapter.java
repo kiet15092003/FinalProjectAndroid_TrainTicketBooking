@@ -177,6 +177,14 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.myViewHold
                 }
             }
         });
+        holder.btn_StationMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listenerViewMap.OnButtonViewMapClick(positionTicket);
+                }
+            }
+        });
     }
 
     @Override
@@ -219,8 +227,15 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.myViewHold
         void OnButtonETicketClick(int position);
     }
     private TicketAdapter.OnButtonETicketClickListener listener;
-
     public void setOnButtonETicketClickListener(TicketAdapter.OnButtonETicketClickListener listener) {
         this.listener = listener;
+    }
+
+    public interface OnButtonViewMapClickListener {
+        void OnButtonViewMapClick(int position);
+    }
+    private TicketAdapter.OnButtonViewMapClickListener listenerViewMap;
+    public void setOnButtonViewMapClickListener(TicketAdapter.OnButtonViewMapClickListener listener) {
+        this.listenerViewMap = listener;
     }
 }

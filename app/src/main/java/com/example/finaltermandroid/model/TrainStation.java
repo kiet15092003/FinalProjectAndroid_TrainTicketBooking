@@ -2,14 +2,33 @@ package com.example.finaltermandroid.model;
 
 public class TrainStation {
     String city, name, id;
+    double latitude, longitude;
     public TrainStation(){
 
     }
 
-    public TrainStation(String city, String name, String id) {
+    public TrainStation(String city, String name, String id, double latitude, double longitude) {
         this.city = city;
         this.name = name;
         this.id = id;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public String getId() {

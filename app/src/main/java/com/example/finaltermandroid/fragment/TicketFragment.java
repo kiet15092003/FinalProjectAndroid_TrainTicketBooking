@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketFragment extends Fragment implements TicketAdapter.OnButtonETicketClickListener{
+public class TicketFragment extends Fragment implements TicketAdapter.OnButtonETicketClickListener , TicketAdapter.OnButtonViewMapClickListener{
     RecyclerView recyclerTicket;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +51,7 @@ public class TicketFragment extends Fragment implements TicketAdapter.OnButtonET
                 }
                 TicketAdapter adapter = new TicketAdapter(ticketList,getContext());
                 adapter.setOnButtonETicketClickListener(TicketFragment.this);
+                adapter.setOnButtonViewMapClickListener(TicketFragment.this);
                 recyclerTicket.setAdapter(adapter);
             }
 
@@ -67,6 +68,14 @@ public class TicketFragment extends Fragment implements TicketAdapter.OnButtonET
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, new ETicketFragment(position));
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void OnButtonViewMapClick(int position) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, new StationMapFragment(position));
         fragmentTransaction.commit();
     }
 }

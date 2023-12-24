@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choosing seat number of passenger "
+            android:text="@string/Choosingpassenger"
             />
         <TextView
             android:id="@+id/tv_CustomerCurrent"
@@ -50,12 +50,12 @@
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Departure: "/>
+            android:text="@string/Departure"/>
         <TextView
             android:id="@+id/tv_DepartureSelection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Not select"
+            android:text="@string/Notselect"
             android:background="@drawable/textview_border"
             android:padding="10dp" />
     </LinearLayout>
@@ -71,12 +71,12 @@
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Arrival: "/>
+            android:text="@string/Arrival"/>
         <TextView
             android:id="@+id/tv_ArrivalSelection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Not select"
+            android:text="@string/Notselect"
             android:background="@drawable/textview_border"
             android:padding="10dp" />
     </LinearLayout>
@@ -142,7 +142,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Available" />
+                    android:text="@string/Available" />
             </LinearLayout>
 
             <LinearLayout
@@ -162,7 +162,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sold" />
+                    android:text="@string/Sold" />
             </LinearLayout>
         </LinearLayout>
             <LinearLayout
@@ -194,7 +194,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:strokeWidth="2dp"
         app:cornerRadius="10dp"
-        android:text="CHOOSE SERVICE"
+        android:text="@string/CHOOSESERVICE"
         android:textColor="@color/white"
         app:strokeColor="@color/orangeLess"
         />

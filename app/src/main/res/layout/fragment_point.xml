@@ -18,7 +18,7 @@
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your total payment"
+            android:text="@string/Yourtotalpayment"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="20dp"
@@ -29,7 +29,7 @@
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total payment is the amount paid for seats on the train if the promotion is not received"
+            android:text="@string/dstotal"
             android:textStyle="normal"
             android:textColor="@color/white"
             android:textSize="15dp"
@@ -59,7 +59,7 @@
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your points"
+            android:text="@string/Yourpoints"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="20dp"
@@ -70,7 +70,7 @@
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Points are converted from the total amount paid according to the formula for all system accounts"
+            android:text="@string/dsPoint"
             android:textStyle="normal"
             android:textColor="@color/white"
             android:textSize="15dp"
@@ -109,7 +109,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Change your point to discount"/>
+                android:text="@string/changePoint"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     app:strokeWidth="2dp"
                     app:cornerRadius="10dp"
-                    android:text="Choose"
+                    android:text="@string/btnChoose"
                     android:textColor="@color/black"
                     app:strokeColor="@color/orange"
                     />
@@ -195,7 +195,7 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     app:strokeWidth="2dp"
                     app:cornerRadius="10dp"
-                    android:text="Choose"
+                    android:text="@string/btnChoose"
                     android:textColor="@color/black"
                     app:strokeColor="@color/orange"
                     />
@@ -240,7 +240,7 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     app:strokeWidth="2dp"
                     app:cornerRadius="10dp"
-                    android:text="Choose"
+                    android:text="@string/btnChoose"
                     android:textColor="@color/black"
                     app:strokeColor="@color/orange"
                     />
@@ -285,7 +285,7 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     app:strokeWidth="2dp"
                     app:cornerRadius="10dp"
-                    android:text="Choose"
+                    android:text="@string/btnChoose"
                     android:textColor="@color/black"
                     app:strokeColor="@color/orange"
                     />

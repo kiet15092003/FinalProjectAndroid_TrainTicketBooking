@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
-        android:text="Please touch OK to book seat for next passenger"
+        android:text="@string/ds2Payment"
         />
     <Spinner
         android:id="@+id/PaymentMethodsSpinner"

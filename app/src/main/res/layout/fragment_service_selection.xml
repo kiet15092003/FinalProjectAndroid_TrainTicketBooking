@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choosing seat number of passenger "
+            android:text="@string/Choosingpassenger"
             />
         <TextView
             android:id="@+id/tv_CustomerCurrent"
@@ -55,12 +55,12 @@
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Departure: "/>
+                android:text="@string/Departure"/>
             <TextView
                 android:id="@+id/tv_DepartureSelection"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="Not select"
+                android:text="@string/Notselect"
                 android:background="@drawable/textview_border"
                 android:padding="10dp" />
             <com.google.android.material.button.MaterialButton
@@ -70,7 +70,7 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:strokeWidth="2dp"
                 app:cornerRadius="10dp"
-                android:text="Choose"
+                android:text="@string/btnChoose"
 
                 android:textColor="@color/black"
                 app:strokeColor="@color/orange"
@@ -92,12 +92,12 @@
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Arrival: "/>
+                android:text="@string/Arrival"/>
             <TextView
                 android:id="@+id/tv_ArrivalSelection"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="Not select"
+                android:text="@string/Notselect"
                 android:background="@drawable/textview_border"
                 android:padding="10dp" />
             <com.google.android.material.button.MaterialButton
@@ -107,7 +107,7 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:strokeWidth="2dp"
                 app:cornerRadius="10dp"
-                android:text="Choose"
+                android:text="@string/btnChoose"
                 android:textColor="@color/black"
                 app:strokeColor="@color/orange"
                 android:layout_toRightOf="@+id/iv_imgSrc"
@@ -131,7 +131,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:strokeWidth="2dp"
         app:cornerRadius="10dp"
-        android:text="EDIT CUSTOMER INFORMATION"
+        android:text="@string/EDITCUSTOMER"
         android:textColor="@color/white"
         app:strokeColor="@color/orangeLess"
         />

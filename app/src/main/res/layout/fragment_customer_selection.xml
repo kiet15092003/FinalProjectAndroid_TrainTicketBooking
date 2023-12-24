@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choosing seat number of passenger "
+            android:text="@string/Choosingpassenger"
             />
         <TextView
             android:id="@+id/tv_CustomerCurrent"
@@ -55,12 +55,12 @@
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Departure: "/>
+                android:text="@string/Departure"/>
             <TextView
                 android:id="@+id/tv_DepartureSelection"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="Not select"
+                android:text="@string/Notselect"
                 android:background="@drawable/textview_border"
                 android:padding="10dp" />
         </LinearLayout>
@@ -78,12 +78,12 @@
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Arrival: "/>
+                android:text="@string/Arrival"/>
             <TextView
                 android:id="@+id/tv_ArrivalSelection"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="Not select"
+                android:text="@string/Notselect"
                 android:background="@drawable/textview_border"
                 android:padding="10dp" />
         </LinearLayout>
@@ -106,7 +106,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total: "
+            android:text="@string/total"
             android:textSize="20dp"
             />
         <EditText
@@ -145,7 +145,7 @@
                     android:id="@+id/nameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter your name" />
+                    android:hint="@string/tv_name" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_marginLeft="20dp"
@@ -163,7 +163,7 @@
                     android:id="@+id/phoneEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter your mobile phone" />
+                    android:hint="@string/tv_phone" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_marginLeft="20dp"
@@ -181,8 +181,28 @@
                     android:id="@+id/addressEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter your address" />
+                    android:hint="@string/Enteryouraddress" />
             </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Choosepaymentoption"
+                    />
+                <Spinner
+                    android:id="@+id/PaymentMethodsSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/spinner_border"
+                    android:spinnerMode="dropdown"
+                    />
+            </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -193,7 +213,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Choose discount voucher"
+                    android:text="@string/Choosediscountvoucher"
                     />
                 <Spinner
                     android:id="@+id/DiscountSpinner"
@@ -218,7 +238,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:strokeWidth="2dp"
         app:cornerRadius="10dp"
-        android:text="CONFIRM PAYMENT"
+        android:text="@string/CONFIRMPAYMENT"
         android:textColor="@color/white"
         app:strokeColor="@color/orangeLess"
         />

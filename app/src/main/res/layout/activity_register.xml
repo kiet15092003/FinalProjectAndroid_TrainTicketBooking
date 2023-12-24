@@ -27,7 +27,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign Up"
+                android:text="@string/tt_signup"
                 android:id="@+id/loginText"
                 android:textSize="36sp"
                 android:textAlignment="center"
@@ -48,7 +48,7 @@
                     android:id="@+id/nameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter your name" />
+                    android:hint="@string/tv_name" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/phoneInputLayout"
@@ -64,7 +64,7 @@
                     android:id="@+id/phoneEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter your mobile phone" />
+                    android:hint="@string/tv_phone" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailInputLayout"
@@ -81,7 +81,7 @@
                     android:id="@+id/emailEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter your email" />
+                    android:hint="@string/tv_gmail" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordInputLayout"
@@ -97,7 +97,7 @@
                     android:id="@+id/passwordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter your password" />
+                    android:hint="@string/tv_pass" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/confirmPasswordInputLayout"
@@ -113,7 +113,7 @@
                     android:id="@+id/confirmPasswordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirm your password" />
+                    android:hint="@string/tv_pass_confirm" />
             </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -126,28 +126,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="I agree to the "
+                    android:text="@string/tv_1"
                     android:textSize="11dp"
                     />
                 <TextView
                     android:id="@+id/tvTerm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Term of Service"
+                    android:text="@string/TermofService"
                     android:textColor="@color/orange"
                     android:textSize="11dp"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" and "
+                    android:text="@string/tv_2"
                     android:textSize="11dp"
                     />
                 <TextView
                     android:id="@+id/tvPrivacy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Privacy Policy"
+                    android:text="@string/PrivacyPolicy"
                     android:textColor="@color/orange"
                     android:textSize="11dp"
                     />
@@ -156,10 +156,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:id="@+id/btnSignUp"
-                android:text="Sign Up"
+                android:text="@string/tt_signup"
                 android:textSize="18dp"
                 android:textColor="@color/white"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:backgroundTint="@color/orange"
                 app:cornerRadius = "20dp"/>
             <LinearLayout
@@ -172,7 +172,7 @@
                     android:id="@+id/tvForgotPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Already a member? "
+                    android:text="@string/tt_Alreadyamember"
                     android:textSize="15dp"
                     android:textColor="@color/black"
                     />
@@ -180,7 +180,7 @@
                     android:id="@+id/tvLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Login"
+                    android:text="@string/tt_login"
                     android:textSize="15dp"
                     android:textColor="@color/orange"
                     />

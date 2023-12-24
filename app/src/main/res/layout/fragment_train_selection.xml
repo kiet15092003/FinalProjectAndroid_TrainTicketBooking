@@ -59,12 +59,12 @@
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Departure Selection: "/>
+            android:text="@string/DepartureSelection"/>
         <TextView
             android:id="@+id/tv_DepartureSelection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Not select"
+            android:text="@string/Notselect"
             android:background="@drawable/textview_border"
             android:padding="10dp" />
     </LinearLayout>
@@ -80,12 +80,12 @@
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Arrival Selection: "/>
+            android:text="@string/ArrivalSelection"/>
         <TextView
             android:id="@+id/tv_ArrivalSelection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Not select"
+            android:text="@string/Notselect"
             android:background="@drawable/textview_border"
             android:padding="10dp" />
     </LinearLayout>
@@ -101,7 +101,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:strokeWidth="2dp"
         app:cornerRadius="10dp"
-        android:text="CHOOSE SEAT"
+        android:text="@string/CHOOSESEAT"
         android:textColor="@color/white"
         app:strokeColor="@color/orangeLess"
         />

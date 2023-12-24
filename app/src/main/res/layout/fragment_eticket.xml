@@ -29,7 +29,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DEPARTURE"
+                    android:text="@string/Departure_i"
                     android:textSize="16dp"
                     android:textColor="@color/lightGray"
                     android:textStyle="bold"
@@ -69,7 +69,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DESTINATION"
+                    android:text="@string/DESTINATION_i"
                     android:textSize="16dp"
                     android:textColor="@color/lightGray"
                     android:textStyle="bold"
@@ -116,7 +116,7 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Departure time: "/>
+                    android:text="@string/Departure_time"/>
                 <TextView
                     android:id="@+id/tv_departureTime"
                     android:textSize="15dp"
@@ -152,7 +152,7 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Destination time: "/>
+                    android:text="@string/DestinationTime"/>
                 <TextView
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -188,7 +188,7 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Train: "/>
+                    android:text="@string/train"/>
                 <TextView
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -207,7 +207,7 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Passenger: "/>
+                    android:text="@string/Passenger"/>
                 <TextView
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -226,7 +226,7 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Seat number: "/>
+                    android:text="@string/Seatnumber"/>
                 <TextView
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -260,7 +260,7 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Service name: "/>
+                    android:text="@string/Servicename"/>
                 <TextView
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -295,7 +295,7 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Discount: "/>
+                    android:text="@string/Discount"/>
                 <TextView
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -326,7 +326,7 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total Payment: "/>
+                    android:text="@string/TotalPayment"/>
                 <TextView
                     android:id="@+id/tv_totalPayment"
                     android:textSize="15dp"
@@ -346,7 +346,7 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ticket code: "/>
+                    android:text="@string/Ticketcode"/>
                 <TextView
                     android:id="@+id/tv_ticketId"
                     android:textSize="20dp"

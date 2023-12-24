@@ -61,7 +61,7 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             app:strokeWidth="2dp"
             app:cornerRadius="20dp"
-            android:text="BOOK"
+            android:text="@string/BOOK"
             android:textColor="@color/black"
             app:strokeColor="@color/orange"
             android:layout_toRightOf="@+id/iv_imgSrc"

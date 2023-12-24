@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Frequently Asked Questions"
+            android:text="@string/FrequentlyAskedQuestions"
             android:textColor="#FF6319"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="1. Question:  How can I book a train ticket?"
+                android:text="@string/q1"
                 android:textColor="@color/black"
                 android:textSize="21sp" />
 
@@ -54,7 +54,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:textColor="#919191"
-                android:text="Answer: To book a train ticket, you can use our application and follow the simple steps on the interface. Select the departure and destination, enter passenger information, and choose your preferred seat on the train station map."
+                android:text="@string/a1"
                 android:textSize="18sp" />
         </LinearLayout>
         <LinearLayout
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="2. Question: I forgot my password, how can I recover it?"
+                android:text="@string/q2"
                 android:textColor="@color/black"
                 android:textSize="21sp" />
 
@@ -83,7 +83,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:textColor="#919191"
-                android:text="Answer: To recover your password, you can use the 'Forgot Password' option on the login screen. We will send recovery instructions to the email you have registered with."
+                android:text="@string/a2"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="3. Question: How do I make payment for my booked tickets?"
+                android:text="@string/q3"
                 android:textColor="@color/black"
                 android:textSize="21sp" />
 
@@ -113,7 +113,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:textColor="#919191"
-                android:text="Answer: You can make payment for your booked tickets using secure and convenient payment methods such as credit cards, debit cards, or electronic wallets."
+                android:text="@string/a3"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -140,7 +140,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="8dp"
             android:paddingBottom="8dp"
-            android:text="Call hotline for quick support"
+            android:text="@string/Callhotline"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/btnCall"
             app:layout_constraintEnd_toStartOf="@+id/btnCall"

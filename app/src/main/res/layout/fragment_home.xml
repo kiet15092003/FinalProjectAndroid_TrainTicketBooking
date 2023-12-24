@@ -17,14 +17,14 @@
         android:thumb="@drawable/switch_thumb"
         app:track="@drawable/switch_track"
         app:showText="true"
-        android:textOn="ROUND TRIP"
-        android:textOff="ONE WAY"/>
+        android:textOn="@string/ROUNDTRIP"
+        android:textOff="@string/ONEWAY"/>
 
     <TextView
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search Ticket"
+        android:text="@string/SearchTrain"
         android:textSize="36sp"
         android:textAlignment="center"
         android:textStyle="bold"
@@ -50,7 +50,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="FROM"
+                    android:text="@string/FROM"
                     android:textSize="16dp"
                     />
 
@@ -71,7 +71,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TO"
+                    android:text="@string/TO"
                     android:textSize="16dp"
                     />
 
@@ -98,7 +98,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DEPARTURE DAY"
+                        android:text="@string/DEPARTUREDAY"
                         android:textSize="16dp"
                         />
                     <TextView
@@ -125,7 +125,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ARRIVAL DAY"
+                        android:text="@string/ARRIVALDAY"
                         android:textSize="16dp"
                         />
                     <TextView
@@ -150,7 +150,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
-                    android:text="Number of passenger: "
+                    android:text="@string/Numberofpassenger"
                     />
                 <LinearLayout
                     android:layout_marginLeft="10dp"
@@ -200,7 +200,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:strokeWidth="2dp"
                 app:cornerRadius="10dp"
-                android:text="Search Trains"
+                android:text="@string/SearchTrain"
                 android:textColor="@color/white"
                 app:strokeColor="@color/orangeLess"
                 />

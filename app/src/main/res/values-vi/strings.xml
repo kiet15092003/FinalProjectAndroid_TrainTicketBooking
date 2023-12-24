@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Trang chủ</string>
+    <string name="app_name">E Train</string>
     <string name="open_nav">Mở ngăn điều hướng</string>
     <string name="close_nav">Đóng ngăn điều hướng</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -66,6 +66,9 @@
     <string name="ArrivalSelection">"Chọn điểm đến: "</string>
     <string name="CHOOSESEAT">CHỌN GHẾ</string>
 
+    <string name="Arrival_i">ĐIỂM DẾN</string>
+    <string name="TrainNotFound">Không tìm thấy chuyến tàu nào</string>
+
     <!--fragment_seat_selection-->
     <string name="Choosingpassenger">Chọn số ghế của hành khách</string>
     <string name="Departure">"Khởi hành: "</string>
@@ -109,9 +112,16 @@
     <string name="Ticketcode">"Mã vé: "</string>
 
     <!--diaglog_payment_success-->
-    <string name="PaymentSuccessful">Thanh Toán Thành Công</string>
-    <string name="dsPayment">Vé của bạn đã được đặt và thanh toán thành công</string>
+    <string name="PaymentSuccessful">Thành Công</string>
+    <string name="dsPayment">Vé của bạn đã được đặt thành công</string>
     <string name="ds2Payment">Vui lòng nhấn OK để đặt chỗ cho hành khách tiếp theo</string>
+    <string name="dsPaymentTotal">"Tổng số tiền hiện tại là: "</string>
+
+    <string name="allticketssuccessfully">Tất cả vé của bạn đã được đặt thành công</string>
+    <string name="touchOK">Vui lòng nhấn OK để thanh toán hết số tiền của bạn và về trang chủ</string>
+    <string name="ticketforpassenger">Vé cho hành khách </string>
+    <string name="isbookedsuccessfully1"> đã được đặt thành công </string>
+    <string name="touchOKfornextPassenger">Vui lòng nhấn OK để đặt chỗ cho hành khách tiếp theo</string>
 
     <!--diaglog_edit_password-->
     <string name="ChangePassword">Đổi mật khẩu</string>

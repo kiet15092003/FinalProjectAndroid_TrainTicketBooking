@@ -15,7 +15,7 @@
         android:id="@+id/iv_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/ic_app_train_round"
         app:civ_border_width="2dp"
         app:civ_border_color="#FFFFFF"
         app:civ_circle_background_color="#CCCCCC"
@@ -24,14 +24,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Train ticket application"
+        android:text="E Train Application"
         android:textColor="@color/white"
         android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="contact@ourCompany.com"
+        android:text="ETrain@ourCompany.com"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:layout_marginBottom="16dp"/>

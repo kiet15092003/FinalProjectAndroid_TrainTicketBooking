@@ -16,8 +16,8 @@
         android:thumb="@drawable/switch_thumb"
         app:track="@drawable/switch_track"
         app:showText="true"
-        android:textOn="ARRIVAL"
-        android:textOff="DEPARTURE"/>
+        android:textOn="@string/Arrival_i"
+        android:textOff="@string/Departure_i"/>
 
     <TextView
         android:layout_marginLeft="16dp"
@@ -25,7 +25,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="There weren't any trains to be found"
+        android:text="@string/TrainNotFound"
         />
 
     <androidx.cardview.widget.CardView

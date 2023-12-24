@@ -84,11 +84,11 @@ public class PaymentSuccessDialog extends DialogFragment {
 
         tv_TextView3.setText(String.valueOf(totalMoneyNow+totalMoneyBack) + "k");
         if (currentCustomer == numberOfCustomer){
-            tv_TextView1.setText("Your all tickets are booked successfully");
-            tv_TextView2.setText("Please touch OK to pay all your money and back to home");
+            tv_TextView1.setText(R.string.allticketssuccessfully);
+            tv_TextView2.setText(R.string.touchOK);
         } else {
-            tv_TextView1.setText("The ticket for passenger " + String.valueOf(currentCustomer) + " / " + String.valueOf(numberOfCustomer) + " is booked successfully");
-            tv_TextView2.setText("Please touch OK to book for the next passenger");
+            tv_TextView1.setText(R.string.ticketforpassenger + String.valueOf(currentCustomer) + " / " + String.valueOf(numberOfCustomer) + R.string.isbookedsuccessfully1);
+            tv_TextView2.setText(R.string.touchOKfornextPassenger);
         }
         PaymentMethodsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

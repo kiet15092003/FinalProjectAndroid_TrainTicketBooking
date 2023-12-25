@@ -120,7 +120,7 @@
     <string name="allticketssuccessfully">Tất cả vé của bạn đã được đặt thành công</string>
     <string name="touchOK">Vui lòng nhấn OK để thanh toán hết số tiền của bạn và về trang chủ</string>
     <string name="ticketforpassenger">Vé cho hành khách </string>
-    <string name="isbookedsuccessfully1"> đã được đặt thành công </string>
+    <string name="isbookedsuccessfully1">  đã được đặt thành công </string>
     <string name="touchOKfornextPassenger">Vui lòng nhấn OK để đặt chỗ cho hành khách tiếp theo</string>
 
     <!--diaglog_edit_password-->
@@ -138,7 +138,7 @@
 
     <!--activity_forgotten_password-->
     <string name="Forgottenpassword">Đã quên mật khẩu</string>
-    <string name="dsEmailPass">Please enter your email then we will help you to recover your account</string>
+    <string name="dsEmailPass">Vui lòng nhập email của bạn sau đó chúng tôi sẽ giúp bạn khôi phục tài khoản của bạn</string>
     <string name="btn_Submit">Gửi</string>
     <string name="tv_remember">Tôi đã nhớ mật khẩu của mình </string>
 

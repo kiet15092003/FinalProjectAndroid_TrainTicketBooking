@@ -105,7 +105,7 @@
     <string name="allticketssuccessfully">Your all tickets are booked successfully</string>
     <string name="touchOK">Please touch OK to pay all your money and back to home</string>
     <string name="ticketforpassenger"> The ticket for passenger </string>
-    <string name="isbookedsuccessfully1"> is booked successfully </string>
+    <string name="isbookedsuccessfully1">  is booked successfully </string>
     <string name="touchOKfornextPassenger">Please touch OK to book for the next passenger</string>
     <string name="Arrival_i">ARRIVAL</string>
     <string name="TrainNotFound">There weren\'t any trains to be found</string>

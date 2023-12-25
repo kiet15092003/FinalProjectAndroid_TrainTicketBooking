@@ -159,31 +159,24 @@ public class HomeFragment extends Fragment {
                     Toast.makeText(getContext(),"Please choose your day again",Toast.LENGTH_LONG).show();
                 } else {
                     DatabaseReference stationScheduleRefs = FirebaseDatabase.getInstance().getReference().child("stationSchedule");
-                    stationScheduleRefs.orderByChild("departureStation").equalTo(selectedDepartureStationId).addValueEventListener(new ValueEventListener() {
+                    stationScheduleRefs.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()){
-                                for (DataSnapshot stationScheduleSnapshot : snapshot.getChildren()) {
-                                    String stationScheduleId = stationScheduleSnapshot.getKey();
-                                    DatabaseReference stationScheduleRef = FirebaseDatabase.getInstance().getReference().child("stationSchedule").child(stationScheduleId);
-                                    stationScheduleRef.addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            if (snapshot.exists()){
-                                                if (snapshot.child("destinationStation").getValue(String.class).equals(selectedDestinationStationId)
-                                                        && snapshot.child("departureDate").getValue(String.class).equals(btnChooseDateDeparture.getText().toString())){
-                                                    processData(snapshot.getKey());
-                                                } else{
-                                                    processData("");
-                                                }
-                                            }
-                                        }
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {}
-                                    });
+                            String selectedStationScheduleId = "";
+                            for (DataSnapshot stationScheduleSnapshot : snapshot.getChildren()) {
+                                String stationScheduleId = stationScheduleSnapshot.getKey();
+                                String destinationStationValue =  stationScheduleSnapshot.child("destinationStation").getValue(String.class);
+                                String departureStationValue = stationScheduleSnapshot.child("departureStation").getValue(String.class);
+                                String departureDateValue = stationScheduleSnapshot.child("departureDate").getValue(String.class);
+                                if (destinationStationValue.equals(selectedDestinationStationId) && departureStationValue.equals(selectedDepartureStationId)
+                                    && departureDateValue.equals(btnChooseDateDeparture.getText().toString())){
+                                    selectedStationScheduleId = stationScheduleId;
                                 }
-                            } else {
+                            }
+                            if (selectedStationScheduleId.equals("")){
                                 processData("");
+                            } else {
+                                processData(selectedStationScheduleId);
                             }
                         }
                         @Override
@@ -240,42 +233,33 @@ public class HomeFragment extends Fragment {
     }
     private void processData(String data) {
         if (isReturnSwitch.isChecked()){
-            DatabaseReference stationScheduleArrivalRefs = FirebaseDatabase.getInstance().getReference().child("stationSchedule");
-            stationScheduleArrivalRefs.orderByChild("departureStation").equalTo(selectedDestinationStationId).addValueEventListener(new ValueEventListener() {
+            DatabaseReference stationScheduleRefs = FirebaseDatabase.getInstance().getReference().child("stationSchedule");
+            stationScheduleRefs.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()){
-                        for (DataSnapshot stationScheduleSnapshot : snapshot.getChildren()) {
-                            String stationScheduleId = stationScheduleSnapshot.getKey();
-                            DatabaseReference stationScheduleRef = FirebaseDatabase.getInstance().getReference().child("stationSchedule").child(stationScheduleId);
-                            stationScheduleRef.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    if (snapshot.exists()){
-                                        if (snapshot.child("destinationStation").getValue(String.class).equals(selectedDepartureStationId)
-                                                && snapshot.child("departureDate").getValue(String.class).equals(btnChooseDateArrival.getText().toString())){
-                                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                            fragmentTransaction.replace(R.id.frame_layout, new TrainSelectionFragment(data, snapshot.getKey(), true,
-                                                    Integer.parseInt(tv_numberOfCustomer.getText().toString()),1));
-                                            fragmentTransaction.commit();
-                                        } else {
-                                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                            fragmentTransaction.replace(R.id.frame_layout, new TrainSelectionFragment(data, "", true,
-                                                    Integer.parseInt(tv_numberOfCustomer.getText().toString()),1));
-                                            fragmentTransaction.commit();
-                                        }
-                                    }
-                                }
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {}
-                            });
+                    String selectedStationScheduleId = "";
+                    for (DataSnapshot stationScheduleSnapshot : snapshot.getChildren()) {
+                        String stationScheduleId = stationScheduleSnapshot.getKey();
+                        String destinationStationValue =  stationScheduleSnapshot.child("destinationStation").getValue(String.class);
+                        String departureStationValue = stationScheduleSnapshot.child("departureStation").getValue(String.class);
+                        String departureDateValue = stationScheduleSnapshot.child("departureDate").getValue(String.class);
+                        if (destinationStationValue.equals(selectedDepartureStationId) && departureStationValue.equals(selectedDestinationStationId)
+                                && departureDateValue.equals(btnChooseDateArrival.getText().toString())){
+                            selectedStationScheduleId = stationScheduleId;
                         }
-                    } else{
+                    }
+                    if (selectedStationScheduleId.equals("")){
+                        //not have train arrival
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.frame_layout, new TrainSelectionFragment(data, "", true,
+                                Integer.parseInt(tv_numberOfCustomer.getText().toString()),1));
+                        fragmentTransaction.commit();
+                    } else {
+                        //have train arrival
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frame_layout, new TrainSelectionFragment(data, selectedStationScheduleId, true,
                                 Integer.parseInt(tv_numberOfCustomer.getText().toString()),1));
                         fragmentTransaction.commit();
                     }

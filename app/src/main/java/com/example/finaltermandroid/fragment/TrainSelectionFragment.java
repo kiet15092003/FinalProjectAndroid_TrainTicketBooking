@@ -140,6 +140,8 @@ public class TrainSelectionFragment extends Fragment  implements TrainBookingAda
                         TrainBookingAdapter adapter = new TrainBookingAdapter(trainScheduleList,TrainSelectionFragment.this.getContext());
                         rv_TrainSelection.setAdapter(adapter);
                         adapter.setOnButtonClickListener(TrainSelectionFragment.this);
+                    } else {
+                        tv_numberTotalTrain.setText("There weren't any trains to be found");
                     }
                 }
                 @Override

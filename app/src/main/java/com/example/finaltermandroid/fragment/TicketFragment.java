@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.finaltermandroid.R;
 import com.example.finaltermandroid.adapter.TicketAdapter;
 import com.example.finaltermandroid.adapter.TrainCarriageAdapter;
+import com.example.finaltermandroid.dialog.TicketCancelDialog;
 import com.example.finaltermandroid.model.Ticket;
 import com.example.finaltermandroid.model.TrainCarriage;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketFragment extends Fragment implements TicketAdapter.OnButtonETicketClickListener , TicketAdapter.OnButtonViewMapClickListener{
+public class TicketFragment extends Fragment implements TicketAdapter.OnButtonETicketClickListener ,
+        TicketAdapter.OnButtonViewMapClickListener, TicketAdapter.OnButtonCancelTicketClickListener{
     RecyclerView recyclerTicket;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +54,7 @@ public class TicketFragment extends Fragment implements TicketAdapter.OnButtonET
                 TicketAdapter adapter = new TicketAdapter(ticketList,getContext());
                 adapter.setOnButtonETicketClickListener(TicketFragment.this);
                 adapter.setOnButtonViewMapClickListener(TicketFragment.this);
+                adapter.setOnButtonCancelTicketClickListener(TicketFragment.this);
                 recyclerTicket.setAdapter(adapter);
             }
 
@@ -78,4 +81,15 @@ public class TicketFragment extends Fragment implements TicketAdapter.OnButtonET
         fragmentTransaction.replace(R.id.frame_layout, new StationMapFragment(position));
         fragmentTransaction.commit();
     }
+
+    public void showDialog (Ticket ticket) {
+        TicketCancelDialog ticketCancelDialog = new TicketCancelDialog(ticket);
+        ticketCancelDialog.show(getChildFragmentManager(), "TicketCancelDialogFragment");
+    }
+
+    @Override
+    public void OnButtonViewMapClick(Ticket ticket) {
+        showDialog(ticket);
+    }
 }
+

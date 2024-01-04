@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -16,6 +17,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finaltermandroid.R;
+import com.example.finaltermandroid.dialog.EditPhoneDialog;
+import com.example.finaltermandroid.dialog.TicketCancelDialog;
+import com.example.finaltermandroid.fragment.HomeFragment;
 import com.example.finaltermandroid.model.Ticket;
 import com.example.finaltermandroid.model.TrainSchedule;
 import com.google.firebase.database.DataSnapshot;
@@ -44,63 +48,72 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.myViewHold
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         Ticket ticket = ticketList.get(position);
-        //Load textview Customer
-        DatabaseReference customerRef = FirebaseDatabase.getInstance().getReference().child("customer").child(ticket.getCustomerId());
-        customerRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                holder.tv_customerName.setText(snapshot.child("name").getValue(String.class));
-            }
+        try{
+            //Load textview Customer
+            DatabaseReference customerRef = FirebaseDatabase.getInstance().getReference().child("customer").child(ticket.getCustomerId());
+            customerRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    holder.tv_customerName.setText(snapshot.child("name").getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-        //Load textview seat
-        DatabaseReference seatRef = FirebaseDatabase.getInstance().getReference().child("seatsBooked").child(ticket.getSeatBookedId());
-        seatRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                holder.tv_seatNumber.setText(snapshot.child("seatNumber").getValue(String.class));
-                holder.tv_seatPrice.setText(String.valueOf(snapshot.child("price").getValue(Long.class)/1000)+"k");
-                //Set textview departure and destination time
-                DatabaseReference trainScheduleRef = FirebaseDatabase.getInstance().getReference().child("trainSchedule").
-                        child(snapshot.child("trainSchedule").getValue(String.class));
-                trainScheduleRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        holder.tv_departureTime.setText(snapshot.child("departureTime").getValue(String.class));
-                        holder.tv_destinationTime.setText(snapshot.child("destinationTime").getValue(String.class));
-                        holder.tv_trainNumber.setText(snapshot.child("trainNumber").getValue(String.class));
-                        // Set textview departure and destination date
-                        DatabaseReference stationScheduleRef = FirebaseDatabase.getInstance().getReference().child("stationSchedule").
-                                child(snapshot.child("stationSchedule").getValue(String.class));
-                        stationScheduleRef.addValueEventListener(new ValueEventListener() {
+                }
+            });
+            //Load textview seat
+            DatabaseReference seatRef = FirebaseDatabase.getInstance().getReference().child("seatsBooked").child(ticket.getSeatBookedId());
+            seatRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    try {
+                        holder.tv_seatNumber.setText(snapshot.child("seatNumber").getValue(String.class));
+                        holder.tv_seatPrice.setText(String.valueOf(snapshot.child("price").getValue(Long.class)/1000)+"k");
+                        //Set textview departure and destination time
+                        DatabaseReference trainScheduleRef = FirebaseDatabase.getInstance().getReference().child("trainSchedule").
+                                child(snapshot.child("trainSchedule").getValue(String.class));
+                        trainScheduleRef.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                holder.tv_departureDate.setText(snapshot.child("departureDate").getValue(String.class));
-                                holder.tv_destinationDate.setText(snapshot.child("destinationDate").getValue(String.class));
-                                //Set text view station
-                                DatabaseReference departureStationRef = FirebaseDatabase.getInstance().getReference().child("train station").
-                                        child(snapshot.child("departureStation").getValue(String.class));
-                                departureStationRef.addValueEventListener(new ValueEventListener() {
+                                holder.tv_departureTime.setText(snapshot.child("departureTime").getValue(String.class));
+                                holder.tv_destinationTime.setText(snapshot.child("destinationTime").getValue(String.class));
+                                holder.tv_trainNumber.setText(snapshot.child("trainNumber").getValue(String.class));
+                                // Set textview departure and destination date
+                                DatabaseReference stationScheduleRef = FirebaseDatabase.getInstance().getReference().child("stationSchedule").
+                                        child(snapshot.child("stationSchedule").getValue(String.class));
+                                stationScheduleRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        holder.tv_departureStation.setText(snapshot.child("name").getValue(String.class));
-                                    }
+                                        holder.tv_departureDate.setText(snapshot.child("departureDate").getValue(String.class));
+                                        holder.tv_destinationDate.setText(snapshot.child("destinationDate").getValue(String.class));
+                                        //Set text view station
+                                        DatabaseReference departureStationRef = FirebaseDatabase.getInstance().getReference().child("train station").
+                                                child(snapshot.child("departureStation").getValue(String.class));
+                                        departureStationRef.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                holder.tv_departureStation.setText(snapshot.child("name").getValue(String.class));
+                                            }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
-                                DatabaseReference destinationStationRef = FirebaseDatabase.getInstance().getReference().child("train station").
-                                        child(snapshot.child("destinationStation").getValue(String.class));
-                                destinationStationRef.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        holder.tv_destinationStation.setText(snapshot.child("name").getValue(String.class));
+                                            }
+                                        });
+                                        DatabaseReference destinationStationRef = FirebaseDatabase.getInstance().getReference().child("train station").
+                                                child(snapshot.child("destinationStation").getValue(String.class));
+                                        destinationStationRef.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                holder.tv_destinationStation.setText(snapshot.child("name").getValue(String.class));
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
                                     }
 
                                     @Override
@@ -115,6 +128,24 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.myViewHold
 
                             }
                         });
+                    } catch (Exception e){
+                        Toast.makeText(context,"Your ticket has been cancelled",Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            //Load service
+            if (!ticket.getServiceId().equals("Not service")){
+                DatabaseReference serviceRef = FirebaseDatabase.getInstance().getReference().child("service").child(ticket.getServiceId());
+                serviceRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        holder.tv_servicePrice.setText(String.valueOf(snapshot.child("price").getValue(Long.class)/1000)+"k");
+                        holder.tv_serviceName.setText(snapshot.child("name").getValue(String.class));
                     }
 
                     @Override
@@ -122,86 +153,75 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.myViewHold
 
                     }
                 });
+            } else {
+                holder.tv_servicePrice.setText("0k");
+                holder.tv_serviceName.setText("Not service");
             }
+            //Load discount
+            if (!ticket.getDiscountId().equals("Choose discount")){
+                DatabaseReference discountRef = FirebaseDatabase.getInstance().getReference().child("discount").child(ticket.getDiscountId());
+                discountRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        holder.tv_discountKey.setText(snapshot.child("discountKey").getValue(String.class));
+                        holder.tv_discountValue.setText(String.valueOf(snapshot.child("discountValue").getValue(Double.class)*100)+"%");
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
+                    }
+                });
+            } else {
+                holder.tv_discountKey.setText("Not discount");
+                holder.tv_discountValue.setText("0%");
             }
-        });
-        //Load service
-        if (!ticket.getServiceId().equals("Not service")){
-            DatabaseReference serviceRef = FirebaseDatabase.getInstance().getReference().child("service").child(ticket.getServiceId());
-            serviceRef.addValueEventListener(new ValueEventListener() {
+            holder.tv_totalPayment.setText(String.valueOf(ticket.getTotalMoney()/1000) + "k");
+            int positionTicket = position;
+            holder.btnViewETicket.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    holder.tv_servicePrice.setText(String.valueOf(snapshot.child("price").getValue(Long.class)/1000)+"k");
-                    holder.tv_serviceName.setText(snapshot.child("name").getValue(String.class));
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.OnButtonETicketClick(positionTicket);
+                    }
                 }
             });
-        } else {
-            holder.tv_servicePrice.setText("0k");
-            holder.tv_serviceName.setText("Not service");
-        }
-        //Load discount
-        if (!ticket.getDiscountId().equals("Choose discount")){
-            DatabaseReference discountRef = FirebaseDatabase.getInstance().getReference().child("discount").child(ticket.getDiscountId());
-            discountRef.addValueEventListener(new ValueEventListener() {
+            holder.btn_StationMap.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    holder.tv_discountKey.setText(snapshot.child("discountKey").getValue(String.class));
-                    holder.tv_discountValue.setText(String.valueOf(snapshot.child("discountValue").getValue(Double.class)*100)+"%");
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listenerViewMap.OnButtonViewMapClick(positionTicket);
+                    }
                 }
             });
-        } else {
-            holder.tv_discountKey.setText("Not discount");
-            holder.tv_discountValue.setText("0%");
+            holder.cancelTicket.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listenerCancelTicket.OnButtonViewMapClick(ticket);
+                    }
+                }
+            });
+            holder.btn_shareTrain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_SEND);
+                    String textShare = "I have a journey from " + holder.tv_departureStation.getText().toString() + " in "
+                            + holder.tv_departureDate.getText().toString() + " at " + holder.tv_departureTime.getText().toString()
+                            + " to " + holder.tv_destinationStation.getText().toString() + " in "
+                            + holder.tv_destinationDate.getText().toString() + " at " + holder.tv_destinationTime.getText().toString()
+                            + ". I will go on train number " + holder.tv_trainNumber.getText().toString() + " and enjoy the journey.";
+                    intent.putExtra(Intent.EXTRA_TEXT, textShare);
+                    intent.setType("text/plain");
+                    if (intent.resolveActivity(context.getPackageManager())!=null){
+                        context.startActivity(intent);
+                    }
+                }
+            });
+        } catch (Exception e){
+
         }
-        holder.tv_totalPayment.setText(String.valueOf(ticket.getTotalMoney()/1000) + "k");
-        int positionTicket = position;
-        holder.btnViewETicket.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    listener.OnButtonETicketClick(positionTicket);
-                }
-            }
-        });
-        holder.btn_StationMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    listenerViewMap.OnButtonViewMapClick(positionTicket);
-                }
-            }
-        });
-        holder.btn_shareTrain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_SEND);
-                String textShare = "I have a journey from " + holder.tv_departureStation.getText().toString() + " in "
-                        + holder.tv_departureDate.getText().toString() + " at " + holder.tv_departureTime.getText().toString()
-                        + " to " + holder.tv_destinationStation.getText().toString() + " in "
-                        + holder.tv_destinationDate.getText().toString() + " at " + holder.tv_destinationTime.getText().toString()
-                        + ". I will go on train number " + holder.tv_trainNumber.getText().toString() + " and enjoy the journey.";
-                intent.putExtra(Intent.EXTRA_TEXT, textShare);
-                intent.setType("text/plain");
-                if (intent.resolveActivity(context.getPackageManager())!=null){
-                    context.startActivity(intent);
-                }
-            }
-        });
     }
 
     @Override
@@ -214,10 +234,11 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.myViewHold
                 tv_destinationStation,tv_trainNumber,tv_customerName,tv_seatNumber,tv_serviceName,tv_discountKey,
                 tv_seatPrice,tv_servicePrice,tv_discountValue,tv_totalPayment;
         LinearLayout detailView;
-        Button btn_shareTrain,btn_StationMap,btnViewETicket;
+        Button btn_shareTrain,btn_StationMap,btnViewETicket,cancelTicket;
         CardView recCard;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
+            cancelTicket = itemView.findViewById(R.id.cancelTicket);
             tv_departureTime = itemView.findViewById(R.id.tv_departureTime);
             tv_departureDate = itemView.findViewById(R.id.tv_departureDate);
             tv_departureStation = itemView.findViewById(R.id.tv_departureStation);
@@ -247,12 +268,18 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.myViewHold
     public void setOnButtonETicketClickListener(TicketAdapter.OnButtonETicketClickListener listener) {
         this.listener = listener;
     }
-
     public interface OnButtonViewMapClickListener {
         void OnButtonViewMapClick(int position);
     }
     private TicketAdapter.OnButtonViewMapClickListener listenerViewMap;
     public void setOnButtonViewMapClickListener(TicketAdapter.OnButtonViewMapClickListener listener) {
         this.listenerViewMap = listener;
+    }
+    public interface OnButtonCancelTicketClickListener {
+        void OnButtonViewMapClick(Ticket ticket);
+    }
+    private TicketAdapter.OnButtonCancelTicketClickListener listenerCancelTicket;
+    public void setOnButtonCancelTicketClickListener(TicketAdapter.OnButtonCancelTicketClickListener listenerCancelTicket) {
+        this.listenerCancelTicket = listenerCancelTicket;
     }
 }

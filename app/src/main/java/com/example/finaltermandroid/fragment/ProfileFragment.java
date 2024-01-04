@@ -193,7 +193,6 @@ public class ProfileFragment extends Fragment {
                             // Call a method to load data
                             DatabaseReference accountRef = FirebaseDatabase.getInstance().getReference().child("accounts").child(accountId);
                             accountRef.child("phoneNumber").setValue(result);
-                            Toast.makeText(getContext(), "Update phone number successful", Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override

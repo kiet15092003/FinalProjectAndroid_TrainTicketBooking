@@ -144,20 +144,20 @@ public class HomeFragment extends Fragment {
         btnSearchTrain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LocalDate departureDate = LocalDate.parse(btnChooseDateDeparture.getText().toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                LocalDate currentDate = LocalDate.now();
-                long daysDifference1 = ChronoUnit.DAYS.between(currentDate, departureDate);
-                long daysDifference2 = 10000;
-                long daysDifference3 = 10000;
-                if (isReturn){
-                    LocalDate arrivalDate = LocalDate.parse(btnChooseDateArrival.getText().toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                    daysDifference2 = ChronoUnit.DAYS.between(currentDate, arrivalDate);
-                    daysDifference3 = ChronoUnit.DAYS.between(departureDate,arrivalDate);
-                }
-                if (daysDifference1<0 || daysDifference2<0 || daysDifference3<0){
-                    //Toast.makeText(getContext(),String.valueOf(daysDifference2),Toast.LENGTH_LONG).show();
-                    Toast.makeText(getContext(),"Please choose your day again",Toast.LENGTH_LONG).show();
-                } else {
+//                LocalDate departureDate = LocalDate.parse(btnChooseDateDeparture.getText().toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+//                LocalDate currentDate = LocalDate.now();
+//                long daysDifference1 = ChronoUnit.DAYS.between(currentDate, departureDate);
+//                long daysDifference2 = 10000;
+//                long daysDifference3 = 10000;
+//                if (isReturn){
+//                    LocalDate arrivalDate = LocalDate.parse(btnChooseDateArrival.getText().toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+//                    daysDifference2 = ChronoUnit.DAYS.between(currentDate, arrivalDate);
+//                    daysDifference3 = ChronoUnit.DAYS.between(departureDate,arrivalDate);
+//                }
+//                if (daysDifference2<0 || daysDifference3<0){
+//                    //Toast.makeText(getContext(),String.valueOf(daysDifference2),Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getContext(),"Please choose your day again",Toast.LENGTH_LONG).show();
+//                } else {
                     DatabaseReference stationScheduleRefs = FirebaseDatabase.getInstance().getReference().child("stationSchedule");
                     stationScheduleRefs.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -183,7 +183,7 @@ public class HomeFragment extends Fragment {
                         public void onCancelled(@NonNull DatabaseError error) {}
                     });
                 }
-            }
+            //}
         });
         return view;
     }

@@ -109,5 +109,6 @@
     <string name="touchOKfornextPassenger">Please touch OK to book for the next passenger</string>
     <string name="Arrival_i">ARRIVAL</string>
     <string name="TrainNotFound">There weren\'t any trains to be found</string>
+    <string name="Cancel">CANCEL</string>
 
 </resources>

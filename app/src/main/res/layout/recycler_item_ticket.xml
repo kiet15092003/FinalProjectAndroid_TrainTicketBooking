@@ -130,17 +130,17 @@
                 android:paddingStart="8dp"
                 android:orientation="horizontal"
                 android:background="@drawable/card_border">
+
                 <Button
-                    android:layout_marginRight="10dp"
                     android:id="@+id/btn_shareTrain"
-                    android:layout_width="wrap_content"
+                    android:layout_width="99dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
                     android:background="@drawable/button_border"
                     android:text="@string/ShareTrain"
-                    android:textColor="@color/orange"
-                    />
+                    android:textColor="@color/orange" />
                 <Button
                     android:layout_marginRight="10dp"
                     android:id="@+id/btn_StationMap"
@@ -169,7 +169,7 @@
                 android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="4.8"
+                android:layout_weight="5.0"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_marginBottom="5dp"
@@ -313,7 +313,7 @@
                 <LinearLayout
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
                     <TextView
                         android:textSize="15dp"
@@ -329,6 +329,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="3224k"/>
+                    <Button
+                        android:id="@+id/cancelTicket"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/ic_delete"
+                        android:layout_marginStart="110dp"
+                        android:text="@string/Cancel"
+                        android:textColor="#FF6319"
+                        android:background="@drawable/button_border"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
